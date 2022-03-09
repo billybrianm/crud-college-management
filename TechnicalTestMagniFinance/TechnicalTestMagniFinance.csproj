@@ -133,23 +133,35 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Student.Context.cs">
+    <Compile Include="Models\Colleges.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Student.Context.tt</DependentUpon>
+      <DependentUpon>Colleges.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colleges.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Colleges.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colleges.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Colleges.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cours.cs">
+      <DependentUpon>Colleges.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Grade.cs">
+      <DependentUpon>Colleges.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
-      <DependentUpon>Student.tt</DependentUpon>
+      <DependentUpon>Colleges.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Student.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Student.edmx</DependentUpon>
+    <Compile Include="Models\Subject.cs">
+      <DependentUpon>Colleges.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Student1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Student.tt</DependentUpon>
+    <Compile Include="Models\Teacher.cs">
+      <DependentUpon>Colleges.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -165,29 +177,29 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Student.Context.tt">
+    <Content Include="Models\Colleges.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Student.Context.cs</LastGenOutput>
-      <DependentUpon>Student.edmx</DependentUpon>
+      <DependentUpon>Colleges.edmx</DependentUpon>
+      <LastGenOutput>Colleges.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Student.tt">
+    <Content Include="Models\Colleges.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Student.edmx</DependentUpon>
-      <LastGenOutput>Student1.cs</LastGenOutput>
+      <DependentUpon>Colleges.edmx</DependentUpon>
+      <LastGenOutput>Colleges.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Student.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Student.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Student.edmx.diagram">
-      <DependentUpon>Student.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\angular.min.js.map" />
+    <EntityDeploy Include="Models\Colleges.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Colleges.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Colleges.edmx.diagram">
+      <DependentUpon>Colleges.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

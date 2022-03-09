@@ -18,6 +18,7 @@ namespace TechnicalTestMagniFinance.Models
         public MagniFinanceEntities()
             : base("name=MagniFinanceEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -25,6 +26,10 @@ namespace TechnicalTestMagniFinance.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Cours> Courses { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<Teacher> Teachers { get; set; }
     }
 }

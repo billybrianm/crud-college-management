@@ -12,22 +12,17 @@ namespace TechnicalTestMagniFinance.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class Cours
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
+        public Cours()
         {
-            this.Grades = new HashSet<Grade>();
             this.Subjects = new HashSet<Subject>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
-        public string Reg_number { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Grade> Grades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subject> Subjects { get; set; }
     }

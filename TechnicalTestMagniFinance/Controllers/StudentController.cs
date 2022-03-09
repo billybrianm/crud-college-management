@@ -11,14 +11,34 @@ namespace TechnicalTestMagniFinance.Controllers
     {
 
         // GET Student/GetStudents
+        [HttpGet]
         public JsonResult GetStudents()
         {
             using (var db = new MagniFinanceEntities())
             {
-                List<Student> funcionarios = db.Students.ToList();
+                List<Student> students = db.Students.ToList();
 
-                return Json(funcionarios, JsonRequestBehavior.AllowGet);
+                JsonResult test = Json(students);
+
+                return Json(students, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        // POST Student/InsertStudent
+        [HttpPost]
+        public JsonResult InsertStudent(Student student)
+        {
+            if (student != null)
+            {
+                using (var db = new MagniFinanceEntities())
+                {
+                    db.Students.Add(student);
+                    db.SaveChanges();
+
+                    return Json(new { success = true } );
+                }
+            }
+                return Json(new { success = false });
         }
     }
 }

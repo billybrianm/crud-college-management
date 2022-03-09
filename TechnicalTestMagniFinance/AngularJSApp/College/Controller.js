@@ -2,9 +2,15 @@
 
     getStudents();
 
+    $scope.student = {
+        Name: 'Aurelio Santos',
+        Birthday: '1998-11-22 00:00:00',
+        Reg_number: '789'
+    };
+
 
     function getStudents() {
-        var listStudents = studentService.getAllStudents().then(function (result) {
+        let listStudents = studentService.getAllStudents().then(function (result) {
 
             // convert JSON Date to DD/MM/YYYY for all students
             result.data.forEach(function (element) {
@@ -14,8 +20,16 @@
             });
 
             $scope.Students = result.data;
-        }, function () {
-            alert("There was an error fetching the students.");
+        }, function (error) {
+            console.log(error);
+            alert("There was an error fetching the students." + error);
         })
-    }
+    };
+
+
+    $scope.insertStudent = function () {
+        let studentAdded = studentService.insertStudent($scope.student).then(() => {
+            console.log("ADDED " + studentAdded);
+        });
+    };
 });

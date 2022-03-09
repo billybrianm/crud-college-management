@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MagniFinanceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Enrollments">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="255" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="Reg_number" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+          <Property Name="Fk_CourseId" Type="int" />
+          <Property Name="Fk_TeacherId" Type="int" />
+        </EntityType>
+        <EntityType Name="Teachers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="255" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_Enrollments_Student">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollments">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enrollments_Subject">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enrollments">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grade_Student">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grade_Subject">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subjects_Course">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subjects">
+              <PropertyRef Name="Fk_CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subjects_Teacher">
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subjects">
+              <PropertyRef Name="Fk_TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MagniFinanceModelStoreContainer">
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enrollments" EntityType="Self.Enrollments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Enrollments_Student" Association="Self.FK_Enrollments_Student">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Enrollments" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Enrollments_Subject" Association="Self.FK_Enrollments_Subject">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Enrollments" EntitySet="Enrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grade_Student" Association="Self.FK_Grade_Student">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grade_Subject" Association="Self.FK_Grade_Subject">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subjects_Course" Association="Self.FK_Subjects_Course">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subjects_Teacher" Association="Self.FK_Subjects_Teacher">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MagniFinanceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK_Subjects_Course" FromRole="Courses" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="GradeValue" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Grade_Student" FromRole="Grades" ToRole="Students" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_Grade_Subject" FromRole="Grades" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Reg_number" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK_Grade_Student" FromRole="Students" ToRole="Grades" />
+          <NavigationProperty Name="Subjects" Relationship="Self.Enrollments" FromRole="Students" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Fk_CourseId" Type="Int32" />
+          <Property Name="Fk_TeacherId" Type="Int32" />
+          <NavigationProperty Name="Cours" Relationship="Self.FK_Subjects_Course" FromRole="Subjects" ToRole="Courses" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK_Grade_Subject" FromRole="Subjects" ToRole="Grades" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Subjects_Teacher" FromRole="Subjects" ToRole="Teachers" />
+          <NavigationProperty Name="Students" Relationship="Self.Enrollments" FromRole="Subjects" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK_Subjects_Teacher" FromRole="Teachers" ToRole="Subjects" />
+        </EntityType>
+        <Association Name="FK_Subjects_Course">
+          <End Role="Courses" Type="Self.Cours" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subjects">
+              <PropertyRef Name="Fk_CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grade_Student">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grade_Subject">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subjects_Teacher">
+          <End Role="Teachers" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subjects">
+              <PropertyRef Name="Fk_TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Enrollments">
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MagniFinanceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <AssociationSet Name="FK_Subjects_Course" Association="Self.FK_Subjects_Course">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grade_Student" Association="Self.FK_Grade_Student">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grade_Subject" Association="Self.FK_Grade_Subject">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subjects_Teacher" Association="Self.FK_Subjects_Teacher">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="Enrollments" Association="Self.Enrollments">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MagniFinanceModelStoreContainer" CdmEntityContainer="MagniFinanceEntities">
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="MagniFinanceModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="MagniFinanceModel.Grade">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="GradeValue" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="MagniFinanceModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Reg_number" ColumnName="Reg_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="MagniFinanceModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Fk_CourseId" ColumnName="Fk_CourseId" />
+                <ScalarProperty Name="Fk_TeacherId" ColumnName="Fk_TeacherId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="MagniFinanceModel.Teacher">
+              <MappingFragment StoreEntitySet="Teachers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Enrollments" TypeName="MagniFinanceModel.Enrollments" StoreEntitySet="Enrollments">
+            <EndProperty Name="Students">
+              <ScalarProperty Name="Id" ColumnName="StudentId" />
+            </EndProperty>
+            <EndProperty Name="Subjects">
+              <ScalarProperty Name="Id" ColumnName="SubjectId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
