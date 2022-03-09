@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
@@ -167,6 +168,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularJSApp\College\CourseController.js" />
+    <Content Include="AngularJSApp\College\CourseService.js" />
     <Content Include="AngularJSApp\College\StudentController.js" />
     <Content Include="AngularJSApp\College\Modulejs.js" />
     <Content Include="AngularJSApp\College\StudentService.js" />
@@ -231,9 +234,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Student.cshtml" />
     <Content Include="Views\Home\Teacher.cshtml" />
+    <Content Include="Views\Home\Course.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Course\" />
     <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>

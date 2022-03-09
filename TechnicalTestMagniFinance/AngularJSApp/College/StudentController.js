@@ -1,5 +1,4 @@
-﻿/// <reference path="teachercontroller.js" />
-collegeApp.controller('studentController', function ($scope, studentService) {
+﻿collegeApp.controller('studentController', function ($scope, studentService) {
 
     getStudents();
 
@@ -43,7 +42,6 @@ collegeApp.controller('studentController', function ($scope, studentService) {
         $scope.student.Birthday = $scope.student.Birthday.toLocaleString();
 
         if (!$scope.addStudentForm.$valid) {
-            addStudent.style.display = 'block';
 
             alert('All fields are required!');
             return ;
