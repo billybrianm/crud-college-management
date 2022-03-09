@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "Subject";
+}
+
+<h2>Subjects</h2>
+
+<div class="container" ng-controller="subjectController">
+    <div class="panel-body">
+        <button type="button" class="btn btn-info" data-target="#addSubject" data-toggle="modal" ng-click="clearData(); loadReferences();">
+            Add Subject
+        </button>
+    </div>
+
+    <table class="table table-bordered">
+        <thead style="background-color: green;">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Teacher</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="sub in Subjects">
+                <td>{{sub.Id}}</td>
+                <td>{{sub.Name}}</td>
+                <td>{{sub.Cours.Name}}</td>
+                <td>{{sub.Teacher.Name}}</td>
+
+                <td style="width: 200px">
+                    <a href="#" class="btn btn-info" data-target="#updateSubject"
+                       data-toggle="modal" ng-click="updateScopeSubject(sub.Id); loadReferences();">Update</a>
+                    <a href="#" class="btn btn-danger" ng-click="deleteSubject(sub.Id)">Delete</a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    @* BEGIN MODAL - ADD SUBJECT *@
+    <div class="modal" id="addSubject" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-info">New Subject</h3>
+                </div>
+                <div class="modal-body" style="margin: auto; width: 50%; ">
+                    <form class="form-horizontal" name="addSubjectForm">
+                        <div class="form-group">
+                            <input class="form-control" readonly="readonly" name="Id" type="hidden" placeholder="Id" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-info"> Name</label>
+                            <input class="form-control" type="text" name="nome" ng-model="subject.Name" placeholder="Subject Name" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Course</label>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="subject.Fk_CourseId">
+                                <option ng-repeat="item in Courses" value="{{item.Id}}">{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Teacher</label>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="subject.Fk_TeacherId">
+                                <option ng-repeat="item in Teachers" value="{{item.Id}}">{{item.Name}}</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="insertSubject()">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearData()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - ADD SUBJECT *@
+
+    @* BEGIN MODAL - UPDATE SUBJECT *@
+    <div class="modal" id="updateSubject" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-info">Update Subject</h3>
+                </div>
+                <div class="modal-body" style="margin-left: 20px">
+                    <form class="form-horizontal" name="updateSubjectForm">
+                        <div class="form-group">
+                            <input class="form-control" readonly="readonly" name="Id" ng-model="updateSubjectId" type="hidden" placeholder="Id" />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Name</label>
+                            <input class="form-control" name="Name" ng-model="subject.Name" type="text" placeholder="Name" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Course</label>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse">
+                                <option ng-repeat="item in Courses" value="{{item.Id}}">{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Teacher</label>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="subject.Fk_TeacherId">
+                                <option ng-repeat="item in Teachers" value="{{item.Id}}">{{item.Name}}</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnUpdate" data-dismiss="modal" ng-click="updateSubject()">
+                        Update
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - UPDATE SUBJECT*@
+
+</div>
+
+@section scripts {
+    <script src="~/AngularJSApp/College/Modulejs.js"></script>
+    <script src="~/AngularJSApp/College/SubjectController.js"></script>
+    <script src="~/AngularJSApp/College/SubjectService.js"></script>
+    <script src="~/AngularJSApp/College/TeacherService.js"></script>
+    <script src="~/AngularJSApp/College/CourseService.js"></script>
+}

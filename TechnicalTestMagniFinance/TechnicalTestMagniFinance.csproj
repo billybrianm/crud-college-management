@@ -131,6 +131,7 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -173,6 +174,8 @@
     <Content Include="AngularJSApp\College\StudentController.js" />
     <Content Include="AngularJSApp\College\Modulejs.js" />
     <Content Include="AngularJSApp\College\StudentService.js" />
+    <Content Include="AngularJSApp\College\SubjectController.js" />
+    <Content Include="AngularJSApp\College\SubjectService.js" />
     <Content Include="AngularJSApp\College\TeacherController.js" />
     <Content Include="AngularJSApp\College\TeacherService.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -235,10 +238,12 @@
     <Content Include="Views\Home\Student.cshtml" />
     <Content Include="Views\Home\Teacher.cshtml" />
     <Content Include="Views\Home\Course.cshtml" />
+    <Content Include="Views\Home\Subject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Course\" />
+    <Folder Include="Views\Subject\" />
     <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>

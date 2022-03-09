@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MagniFinanceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MagniFinanceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Courses">
           <Key>
             <PropertyRef Name="Id" />
@@ -42,8 +42,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="10" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="255" />
           <Property Name="Fk_CourseId" Type="int" />
           <Property Name="Fk_TeacherId" Type="int" />
         </EntityType>
@@ -160,8 +160,7 @@
             <End Role="Subjects" EntitySet="Subjects" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MagniFinanceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -171,7 +170,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Subjects" Relationship="Self.FK_Subjects_Course" FromRole="Courses" ToRole="Subjects" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -200,7 +198,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
           <Property Name="Fk_CourseId" Type="Int32" />
           <Property Name="Fk_TeacherId" Type="Int32" />
           <NavigationProperty Name="Cours" Relationship="Self.FK_Subjects_Course" FromRole="Subjects" ToRole="Courses" />
@@ -216,7 +214,6 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
           <Property Name="Birthday" Type="DateTime" Precision="3" />
           <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Subjects" Relationship="Self.FK_Subjects_Teacher" FromRole="Teachers" ToRole="Subjects" />
         </EntityType>
         <Association Name="FK_Subjects_Course">
           <End Role="Courses" Type="MagniFinanceModel.Course" Multiplicity="0..1" />

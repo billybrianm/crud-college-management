@@ -32,7 +32,8 @@
 
             $scope.Students = result.data;
         }, function (error) {
-            alert("There was an error fetching the students." + error);
+            console.log(error);
+            alert("There was an error fetching the students.");
         })
     };
 
