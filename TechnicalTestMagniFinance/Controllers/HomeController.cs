@@ -26,5 +26,30 @@ namespace TechnicalTestMagniFinance.Controllers
 
             return View();
         }
+
+        public ActionResult Student()
+        {
+            return View();
+        }
+
+        public ActionResult Teacher()
+        {
+            return View();
+        }
+
+        public ActionResult Course()
+        {
+            return View();
+        }
+
+        public ActionResult Subject()
+        {
+            return View();
+        }
+
+        public ActionResult Grade()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Student";
+}
+
+<h2>Students</h2>
+
+<div class="container" ng-controller="studentController">
+    <div class="panel-body">
+        <button type="button" class="btn btn-info" data-target="#addStudent" data-toggle="modal" ng-click="clearData()">
+            Add Student
+        </button>
+    </div>
+
+    <table class="table table-bordered">
+        <thead style="background-color: cornflowerblue;">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Registration Number</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="stud in Students">
+                <td>{{stud.Id}}</td>
+                <td>{{stud.Name}}</td>
+                <td>{{stud.Birthday}}</td>
+                <td>{{stud.Reg_number}}</td>
+
+                <td style="width: 200px">
+                    <a href="#" class="btn btn-info" data-target="#updateStudent"
+                           data-toggle="modal" ng-click="updateScopeStudent(stud.Id)" >Update</a>
+                    <a href="#" class="btn btn-danger" ng-click="deleteStudent(stud.Id)" >Delete</a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    @* BEGIN MODAL - ADD STUDENT *@
+    <div class="modal" id="addStudent" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-info">New Student</h3>
+                </div>
+                <div class="modal-body" style="margin: auto; width: 50%; ">
+                    <form class="form-horizontal" name="addStudentForm">
+                        <div class="form-group">
+                            <input class="form-control" readonly="readonly" name="Id" type="hidden" placeholder="Id" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-info"> Name</label>
+                            <input class="form-control" type="text" name="nome" ng-model="student.Name" placeholder="Student Name" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Birthday</label>
+                            <input class="form-control" type="date" name="Birthday" ng-model="student.Birthday" placeholder="YYYY-MM-DD" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Registration Number</label>
+                            <input class="form-control" type="text" name="nome" ng-model="student.Reg_number" placeholder="Registration Number" required />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="insertStudent()">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearData()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - ADD STUDENT *@
+
+    @* BEGIN MODAL - UPDATE STUDENT *@
+    <div class="modal" id="updateStudent" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-info">Update Student</h3>
+                </div>
+                <div class="modal-body" style="margin-left: 20px">
+                    <form class="form-horizontal" name="updateStudentForm">
+                        <div class="form-group">
+                            <input class="form-control" readonly="readonly" name="Id" ng-model="updateStudentId" type="hidden" placeholder="Id" required/>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Name</label>
+                            <input class="form-control" name="Name" ng-model="student.Name" type="text" placeholder="Name" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Birthday</label>
+                            <input class="form-control" name="Birthday" ng-model="student.Birthday" type="date" placeholder="Birthday" required/>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Registration Number</label>
+                            <input class="form-control" name="Registration Number" ng-model="student.Reg_number" type="text" placeholder="Registration Number" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnUpdate" data-dismiss="modal" ng-click="updateStudent()">
+                        Update
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* FIM MODAL - ATUALIZAR FUNCIONÁRIO *@
+
+</div>
+
+@section scripts {
+    <script src="~/AngularJSApp/College/Modulejs.js"></script>
+    <script src="~/AngularJSApp/College/StudentController.js"></script>
+    <script src="~/AngularJSApp/College/StudentService.js"></script>
+}

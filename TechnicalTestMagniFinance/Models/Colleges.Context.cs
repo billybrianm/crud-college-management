@@ -26,7 +26,7 @@ namespace TechnicalTestMagniFinance.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cours> Courses { get; set; }
+        public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }

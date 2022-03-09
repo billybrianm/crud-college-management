@@ -1,36 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
-<div class="container" ng-controller="studentController">
-    <div class="panel-heading">List Students</div>
 
-    <table class="table table-bordered">
-        <thead style="background-color: burlywood;">
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Birthday</th>
-                <th>Registration Number</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr ng-repeat="stud in Students">
-                <td>{{stud.Id}}</td>
-                <td>{{stud.Name}}</td>
-                <td>{{stud.Birthday}}</td>
-                <td>{{stud.Reg_number}}</td>
-
-                <td style="width: 200px">
-                    <a href="#" class="btn btn-info" ng-click="insertStudent()">Update</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
-
-</div>
 
 @section scripts {
     <script src="~/AngularJSApp/College/Modulejs.js"></script>

@@ -26,7 +26,7 @@ namespace TechnicalTestMagniFinance.Models
         public Nullable<int> Fk_CourseId { get; set; }
         public Nullable<int> Fk_TeacherId { get; set; }
     
-        public virtual Cours Cours { get; set; }
+        public virtual Course Cours { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grades { get; set; }
         public virtual Teacher Teacher { get; set; }

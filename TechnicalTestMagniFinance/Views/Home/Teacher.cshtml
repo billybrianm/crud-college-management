@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Teacher";
+}
+
+<h2>Teachers</h2>
+
+<div class="container" ng-controller="teacherController">
+    <div class="panel-body">
+        <button type="button" class="btn btn-info" data-target="#addTeacher" data-toggle="modal">
+            Add Teacher
+        </button>
+    </div>
+
+    <table class="table table-bordered">
+        <thead style="background-color: aquamarine;">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="teach in Teachers">
+                <td>{{teach.Id}}</td>
+                <td>{{teach.Name}}</td>
+                <td>{{teach.Birthday}}</td>
+                <td>{{teach.Salary}}</td>
+
+                <td style="width: 200px">
+                    <a href="#" class="btn btn-info" ng-click="updateScopeTeacher(teach.Id)">Update</a>
+                    <a href="#" class="btn btn-danger">Delete</a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    @* BEGIN MODAL - ADD TEACHER *@
+    <div class="modal" id="addTeacher" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-info">New Teacher</h3>
+                </div>
+                <div class="modal-body" style="margin: auto; width: 50%; ">
+                    <form class="form-horizontal" name="addTeacherForm">
+                        <div class="form-group">
+                            <input class="form-control" readonly="readonly" name="Id" type="hidden" placeholder="Id" />
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="nome" ng-model="teacher.Name" placeholder="Student Name" required />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="date" name="Birthday" ng-model="teacher.Birthday" placeholder="__/__/___" required />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="nome" ng-model="teacher.Salary" placeholder="Salary" required />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="insertTeacher()">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - ADD TEACHER *@
+
+</div>
+
+@section scripts {
+    <script src="~/AngularJSApp/College/Modulejs.js"></script>
+    <script src="~/AngularJSApp/College/TeacherController.js"></script>
+    <script src="~/AngularJSApp/College/TeacherService.js"></script>
+}

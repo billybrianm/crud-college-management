@@ -165,7 +165,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MagniFinanceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Cours">
+        <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -219,7 +219,7 @@
           <NavigationProperty Name="Subjects" Relationship="Self.FK_Subjects_Teacher" FromRole="Teachers" ToRole="Subjects" />
         </EntityType>
         <Association Name="FK_Subjects_Course">
-          <End Role="Courses" Type="Self.Cours" Multiplicity="0..1" />
+          <End Role="Courses" Type="MagniFinanceModel.Course" Multiplicity="0..1" />
           <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Courses">
@@ -271,7 +271,7 @@
           <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
         </Association>
         <EntityContainer Name="MagniFinanceEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="Courses" EntityType="MagniFinanceModel.Course" />
           <EntitySet Name="Grades" EntityType="Self.Grade" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="Subjects" EntityType="Self.Subject" />
@@ -304,7 +304,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MagniFinanceModelStoreContainer" CdmEntityContainer="MagniFinanceEntities">
           <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="MagniFinanceModel.Cours">
+            <EntityTypeMapping TypeName="MagniFinanceModel.Course">
               <MappingFragment StoreEntitySet="Courses">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

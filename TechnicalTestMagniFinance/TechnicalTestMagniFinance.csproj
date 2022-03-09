@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,7 +149,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Colleges.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cours.cs">
+    <Compile Include="Models\Course.cs">
       <DependentUpon>Colleges.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grade.cs">
@@ -166,9 +167,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AngularJSApp\College\Controller.js" />
+    <Content Include="AngularJSApp\College\StudentController.js" />
     <Content Include="AngularJSApp\College\Modulejs.js" />
-    <Content Include="AngularJSApp\College\Service.js" />
+    <Content Include="AngularJSApp\College\StudentService.js" />
+    <Content Include="AngularJSApp\College\TeacherController.js" />
+    <Content Include="AngularJSApp\College\TeacherService.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -187,6 +190,7 @@
       <DependentUpon>Colleges.edmx</DependentUpon>
       <LastGenOutput>Colleges.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\angular-datepicker.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -225,10 +229,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Student.cshtml" />
+    <Content Include="Views\Home\Teacher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Student\" />
+    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
