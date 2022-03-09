@@ -37,5 +37,51 @@ namespace TechnicalTestMagniFinance.Controllers
             }
             return Json(new { success = false });
         }
+
+        // Update a Teacher
+        // POST Teacher/UpdateTeacher
+        [HttpPost]
+        public JsonResult UpdateTeacher(Teacher teacher)
+        {
+            using (var db = new MagniFinanceEntities())
+            {
+                var updatedTeacher = db.Teachers.Find(teacher.Id);
+
+                if (updatedTeacher == null)
+                {
+                    return Json(new { success = false });
+                }
+                else
+                {
+                    updatedTeacher.Name = teacher.Name;
+                    updatedTeacher.Birthday = teacher.Birthday;
+                    updatedTeacher.Salary = teacher.Salary;
+
+                    db.SaveChanges();
+                    return Json(updatedTeacher);
+                }
+            }
+        }
+
+        // Delete a Teacher
+        // POST Teacher/DeleteTeacher
+        [HttpPost]
+        public JsonResult DeleteTeacher(int Id)
+        {
+            using (var db = new MagniFinanceEntities())
+            {
+                var teacher = db.Teachers.Find(Id);
+
+                if (teacher == null)
+                {
+                    return Json(new { success = false });
+                }
+
+                db.Teachers.Remove(teacher);
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+        }
     }
 }

@@ -14,4 +14,17 @@
 
         return request;
     }
+
+    this.updateTeacher = function (teacher) {
+        var updatedRequest = $http({
+            method: 'post',
+            url: '/Teacher/UpdateTeacher',
+            data: teacher
+        });
+        return updatedRequest;
+    };
+
+    this.deleteTeacher = function (teacherId) {
+        return $http.post('/Teacher/DeleteTeacher/' + teacherId);
+    }
 });

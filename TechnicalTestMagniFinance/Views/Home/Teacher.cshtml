@@ -30,8 +30,9 @@
                 <td>{{teach.Salary}}</td>
 
                 <td style="width: 200px">
-                    <a href="#" class="btn btn-info" ng-click="updateScopeTeacher(teach.Id)">Update</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="#" class="btn btn-info" data-target="#updateTeacher"
+                       data-toggle="modal" ng-click="updateScopeTeacher(teach.Id)">Update</a>
+                    <a href="#" class="btn btn-danger" ng-click="deleteTeacher(teach.Id)">Delete</a>
                 </td>
 
             </tr>
@@ -71,6 +72,43 @@
         </div>
     </div>
     @* END MODAL - ADD TEACHER *@
+
+    @* BEGIN MODAL - UPDATE TEACHER *@
+    <div class="modal" id="updateTeacher" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-info">Update Teacher</h3>
+                </div>
+                <div class="modal-body" style="margin-left: 20px">
+                    <form class="form-horizontal" name="updateTeacherForm">
+                        <div class="form-group">
+                            <input class="form-control" readonly="readonly" name="Id" ng-model="updateTeacherId" type="hidden" placeholder="Id" />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Name</label>
+                            <input class="form-control" name="Name" ng-model="teacher.Name" type="text" placeholder="Name" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Birthday</label>
+                            <input class="form-control" name="Birthday" ng-model="teacher.Birthday" type="date" placeholder="Birthday" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Registration Number</label>
+                            <input class="form-control" name="Salary" ng-model="teacher.Salary" type="text" placeholder="Salary" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnUpdate" data-dismiss="modal" ng-click="updateTeacher()">
+                        Update
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - UPDATE TEACHER *@
 
 </div>
 
