@@ -51,5 +51,10 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             return View();
         }
+
+        public ActionResult Enrollment()
+        {
+            return View();
+        }
     }
 }
