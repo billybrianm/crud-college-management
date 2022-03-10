@@ -84,10 +84,13 @@ namespace TechnicalTestMagniFinance.Controllers
             {
                 using (var db = new MagniFinanceEntities())
                 {
-                    db.Subjects.Add(subject);
+                    Subject newSubject = db.Subjects.Add(subject);
                     db.SaveChanges();
 
-                    return Json(new { success = true });
+                    newSubject.Cours = db.Courses.Find(subject.Fk_CourseId);
+                    newSubject.Teacher = db.Teachers.Find(subject.Fk_TeacherId);
+
+                    return Json(newSubject);
                 }
             }
             return Json(new { success = false });
@@ -113,6 +116,9 @@ namespace TechnicalTestMagniFinance.Controllers
                     updatedSubject.Fk_TeacherId = subject.Fk_TeacherId;
 
                     db.SaveChanges();
+
+                    updatedSubject.Cours = db.Courses.Find(subject.Fk_CourseId);
+                    updatedSubject.Teacher = db.Teachers.Find(subject.Fk_TeacherId);
                     return Json(updatedSubject);
                 }
             }
@@ -135,7 +141,7 @@ namespace TechnicalTestMagniFinance.Controllers
                 db.Subjects.Remove(subject);
                 db.SaveChanges();
 
-                return Json(new { success = true });
+                return Json(subject);
             }
         }
     }

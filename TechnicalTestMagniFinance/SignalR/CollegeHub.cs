@@ -41,5 +41,21 @@ namespace TechnicalTestMagniFinance.SignalR
         {
             Clients.All.courseDeleted(course);
         }
+
+        // Subject SignalR Functions
+        public void SubjectAdded(Subject subject)
+        {
+            Clients.All.subjectAdded(subject);
+        }
+
+        public void SubjectUpdated(Subject subject)
+        {
+            Clients.All.subjectUpdated(subject);
+        }
+
+        public void SubjectDeleted(Subject subject)
+        {
+            Clients.All.subjectDeleted(subject);
+        }
     }
 }

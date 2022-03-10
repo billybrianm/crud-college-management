@@ -1,4 +1,6 @@
-﻿collegeApp.controller('subjectController', function ($scope, subjectService, teacherService, courseService, studentService) {
+﻿collegeApp.controller('subjectController', function ($scope, subjectService, teacherService, courseService, studentService, signalrService) {
+
+    signalrService.connect();
 
     getSubjects();
     getStudents();
@@ -7,6 +9,29 @@
     $scope.currentTeacher = '';
     $scope.currentSubject = {};
 
+
+
+    $scope.$on('subjectAdded', function (event, subject) {
+
+        $scope.Subjects.push(subject);
+        $scope.$apply();
+    });
+
+    $scope.$on('subjectUpdated', function (event, subject) {
+        let index = $scope.Subjects.findIndex(element => element.Id == subject.Id);
+
+        $scope.Subjects[index] = subject;
+
+        $scope.$apply();
+    });
+
+    $scope.$on('subjectDeleted', function (event, subject) {
+        let index = $scope.Subjects.findIndex(element => element.Id == subject.Id);
+
+        $scope.Subjects.splice(index, 1);
+
+        $scope.$apply();
+    });
 
     $scope.clearData = () => {
         $scope.subject = {
@@ -121,9 +146,10 @@
         $scope.subject.Fk_CourseId = $scope.currentCourse.Id;
         $scope.subject.Fk_TeacherId = $scope.currentTeacher.Id;
 
-        let subjectAdded = subjectService.insertSubject($scope.subject).then(() => {
+        let subjectAdded = subjectService.insertSubject($scope.subject).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Subject added successfully";
+            signalrService.subjectAdded(res.data);
             $scope.clearData();
         }, function () {
             $scope.error = true;
@@ -147,9 +173,10 @@
         $scope.subject.Fk_CourseId = $scope.currentCourse.Id;
 
 
-        subjectService.updateSubject($scope.subject).then(() => {
+        subjectService.updateSubject($scope.subject).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Subject updated successfully";
+            signalrService.subjectUpdated(res.data);
         }, function () {
             $scope.error = true;
             $scope.errorMessage = "Error updating Subject.";
@@ -157,9 +184,10 @@
     };
 
     $scope.deleteSubject = function (Id) {
-        subjectService.deleteSubject(Id).then(() => {
+        subjectService.deleteSubject(Id).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Subject deleted successfully";
+            signalrService.subjectDeleted(res.data);
         }, function () {
             $scope.error = true;
             $scope.errorMessage = "Error deleting Subject.";

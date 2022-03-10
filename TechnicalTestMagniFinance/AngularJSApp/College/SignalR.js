@@ -34,6 +34,18 @@
                     proxy.on('courseDeleted', function (course) {
                         $rootScope.$broadcast('courseDeleted', course);
                     });
+
+                    proxy.on('subjectAdded', function (subject) {
+                        $rootScope.$broadcast('subjectAdded', subject);
+                    });
+
+                    proxy.on('subjectUpdated', function (subject) {
+                        $rootScope.$broadcast('subjectUpdated', subject);
+                    });
+
+                    proxy.on('subjectDeleted', function (subject) {
+                        $rootScope.$broadcast('subjectDeleted', subject);
+                    });
                 },
                 isConnecting: function () {
                     return connection.state === 0;
@@ -61,6 +73,15 @@
                 },
                 courseDeleted: function (course) {
                     proxy.invoke('CourseDeleted', course);
+                },
+                subjectAdded: function (subject) {
+                    proxy.invoke('SubjectAdded', subject);
+                },
+                subjectUpdated: function (subject) {
+                    proxy.invoke('SubjectUpdated', subject);
+                },
+                subjectDeleted: function (subject) {
+                    proxy.invoke('SubjectDeleted', subject);
                 },
             }
         }]);
