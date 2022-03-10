@@ -137,7 +137,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CourseInfosDTO.cs" />
     <Compile Include="Models\StudentDTO.cs" />
+    <Compile Include="Models\StudentGradesDTO.cs" />
+    <Compile Include="Models\SubjectInfosDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\College.Context.cs">
       <AutoGen>True</AutoGen>
@@ -175,6 +178,7 @@
     <Content Include="AngularJSApp\College\Course\CourseService.js" />
     <Content Include="AngularJSApp\College\Grade\GradeController.js" />
     <Content Include="AngularJSApp\College\Grade\GradeService.js" />
+    <Content Include="AngularJSApp\College\HomeController.js" />
     <Content Include="AngularJSApp\College\Student\StudentController.js" />
     <Content Include="AngularJSApp\College\Modulejs.js" />
     <Content Include="AngularJSApp\College\Student\StudentService.js" />

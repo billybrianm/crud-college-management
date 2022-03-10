@@ -2,7 +2,11 @@
 
     this.getAllCourses = () => {
         return $http.get("/Course/GetCourses")
-    }
+    };
+
+    this.getListCourseInfos = () => {
+        return $http.get("/Course/GetListCourseInfos");
+    };
 
     this.insertCourse = function (Course) {
         let request = $http({
@@ -13,7 +17,7 @@
         });
 
         return request;
-    }
+    };
 
     this.updateCourse = function (Course) {
         var updatedRequest = $http({
@@ -26,5 +30,5 @@
 
     this.deleteCourse = function (CourseId) {
         return $http.post('/Course/DeleteCourse/' + CourseId);
-    }
+    };
 });

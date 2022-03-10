@@ -22,6 +22,24 @@ namespace TechnicalTestMagniFinance.Controllers
             }
         }
 
+        // List courses with infos
+        // GET Course/GetListCourseInfos
+        [HttpGet]
+        public JsonResult GetListCourseInfos()
+        {
+            using (var db = new MagniFinanceEntities())
+            {
+                string query = "select c.Name, count(distinct s.Id) as SubjectCount, count(distinct t.Id) as TeacherCount, count(distinct stu.StudentId) as StudentCount, AVG(stu.GradeValue) as AverageGrades from Courses c " +
+                                "LEFT JOIN Subjects s on s.Fk_CourseId = c.Id " +
+                                "LEFT JOIN Teachers t on t.Id = s.Fk_TeacherId " +
+                                "LEFT JOIN Grades stu on stu.SubjectId = s.Id " +
+                                "GROUP BY c.Name";
+                var courses = db.Database.SqlQuery<CourseInfosDTO>(query).ToList();
+
+                return Json(courses, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         // Insert a Course
         // POST Course/InsertCourse
         [HttpPost]
