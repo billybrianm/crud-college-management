@@ -58,8 +58,8 @@ namespace TechnicalTestMagniFinance.Controllers
                 else
                 {
                     updatedSubject.Name = subject.Name;
-                    updatedSubject.Cours = subject.Cours;
-                    updatedSubject.Teacher = subject.Teacher;
+                    updatedSubject.Fk_CourseId = subject.Fk_CourseId;
+                    updatedSubject.Fk_TeacherId = subject.Fk_TeacherId;
 
                     db.SaveChanges();
                     return Json(updatedSubject);

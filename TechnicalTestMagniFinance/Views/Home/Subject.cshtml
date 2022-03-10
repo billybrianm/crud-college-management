@@ -59,14 +59,12 @@
                         </div>
                         <div class="form-group">
                             <label class="text-info"> Course</label>
-                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="subject.Fk_CourseId">
-                                <option ng-repeat="item in Courses" value="{{item.Id}}">{{item.Name}}</option>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse" ng-options="course as course.Name for course in Courses track by course.Id">
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="text-info"> Teacher</label>
-                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="subject.Fk_TeacherId">
-                                <option ng-repeat="item in Teachers" value="{{item.Id}}">{{item.Name}}</option>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentTeacher" ng-options="teacher as teacher.Name for teacher in Teachers track by teacher.Id">                               
                             </select>
                         </div>
                     </form>
@@ -98,14 +96,12 @@
                         </div>
                         <div class="form-group">
                             <label class="text-info"> Course</label>
-                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse">
-                                <option ng-repeat="item in Courses" value="{{item.Id}}">{{item.Name}}</option>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse" ng-options="course as course.Name for course in Courses track by course.Id">
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="text-info"> Teacher</label>
-                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="subject.Fk_TeacherId">
-                                <option ng-repeat="item in Teachers" value="{{item.Id}}">{{item.Name}}</option>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentTeacher" ng-options="teacher as teacher.Name for teacher in Teachers track by teacher.Id">
                             </select>
                         </div>
                     </form>

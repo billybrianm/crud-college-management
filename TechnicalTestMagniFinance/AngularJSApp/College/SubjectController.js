@@ -61,12 +61,17 @@
 
         let subject = $scope.Subjects.find(element => element.Id == Id);
 
-        $scope.currentCourse = subject.Cours.Name;
+        $scope.currentCourse = subject.Cours;
+        $scope.currentTeacher = subject.Teacher;
 
         angular.copy(subject, $scope.subject);
     };
 
     $scope.updateSubject = () => {
+
+        $scope.subject.Fk_TeacherId = $scope.currentTeacher.Id;
+        $scope.subject.Fk_CourseId = $scope.currentCourse.Id;
+
 
         subjectService.updateSubject($scope.subject).then(() => {
             alert('Subject updated successfully.');
