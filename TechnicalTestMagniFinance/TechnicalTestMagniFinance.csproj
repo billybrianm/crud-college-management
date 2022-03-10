@@ -170,18 +170,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AngularJSApp\College\CourseController.js" />
-    <Content Include="AngularJSApp\College\CourseService.js" />
+    <Content Include="AngularJSApp\College\Course\CourseController.js" />
+    <Content Include="AngularJSApp\College\Course\CourseService.js" />
     <Content Include="AngularJSApp\College\Grade\GradeController.js" />
     <Content Include="AngularJSApp\College\Grade\GradeService.js" />
-    <Content Include="AngularJSApp\College\StudentController.js" />
+    <Content Include="AngularJSApp\College\Student\StudentController.js" />
     <Content Include="AngularJSApp\College\Modulejs.js" />
-    <Content Include="AngularJSApp\College\StudentService.js" />
-    <Content Include="AngularJSApp\College\Student\Students.js" />
-    <Content Include="AngularJSApp\College\SubjectController.js" />
-    <Content Include="AngularJSApp\College\SubjectService.js" />
-    <Content Include="AngularJSApp\College\TeacherController.js" />
-    <Content Include="AngularJSApp\College\TeacherService.js" />
+    <Content Include="AngularJSApp\College\Student\StudentService.js" />
+    <Content Include="AngularJSApp\College\Subject\SubjectController.js" />
+    <Content Include="AngularJSApp\College\Subject\SubjectService.js" />
+    <Content Include="AngularJSApp\College\Teacher\TeacherController.js" />
+    <Content Include="AngularJSApp\College\Teacher\TeacherService.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -244,6 +243,7 @@
     <Content Include="Views\Home\Course.cshtml" />
     <Content Include="Views\Home\Subject.cshtml" />
     <Content Include="Views\Home\Grade.cshtml" />
+    <Content Include="Views\Home\Enrollment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

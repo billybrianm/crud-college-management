@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TechnicalTestMagniFinance.Models
+namespace TechnicalTestMagniFinance.Views.Grade
 {
     using System;
     using System.Collections.Generic;

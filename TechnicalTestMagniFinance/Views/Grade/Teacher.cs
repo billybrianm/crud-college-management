@@ -7,14 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TechnicalTestMagniFinance.Models
+namespace TechnicalTestMagniFinance.Views.Grade
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Course
+    public partial class Teacher
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public Nullable<System.DateTime> Birthday { get; set; }
+        public Nullable<decimal> Salary { get; set; }
     }
 }

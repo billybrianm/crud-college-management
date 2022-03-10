@@ -4,6 +4,10 @@
         return $http.get("/Subject/GetSubjects")
     }
 
+    this.getSubject = (Id) => {
+        return $http.get("/Subject/GetSubject/" + Id)
+    }
+
     this.insertSubject = function (subject) {
         let request = $http({
             method: 'post',

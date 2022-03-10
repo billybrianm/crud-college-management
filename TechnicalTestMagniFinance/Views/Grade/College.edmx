@@ -12,14 +12,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="Enrollments">
-          <Key>
-            <PropertyRef Name="SubjectId" />
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="SubjectId" Type="int" Nullable="false" />
-          <Property Name="StudentId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Grades">
           <Key>
             <PropertyRef Name="StudentId" />
@@ -56,30 +48,6 @@
           <Property Name="Birthday" Type="datetime" />
           <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
-        <Association Name="FK_Enrollments_Student">
-          <End Role="Students" Type="Self.Students" Multiplicity="1" />
-          <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Enrollments">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Enrollments_Subject">
-          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
-          <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subjects">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Enrollments">
-              <PropertyRef Name="SubjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Grade_Student">
           <End Role="Students" Type="Self.Students" Multiplicity="1" />
           <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
@@ -130,19 +98,10 @@
         </Association>
         <EntityContainer Name="MagniFinanceModelStoreContainer">
           <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Enrollments" EntityType="Self.Enrollments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Enrollments_Student" Association="Self.FK_Enrollments_Student">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="Enrollments" EntitySet="Enrollments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Enrollments_Subject" Association="Self.FK_Enrollments_Subject">
-            <End Role="Subjects" EntitySet="Subjects" />
-            <End Role="Enrollments" EntitySet="Enrollments" />
-          </AssociationSet>
           <AssociationSet Name="FK_Grade_Student" Association="Self.FK_Grade_Student">
             <End Role="Students" EntitySet="Students" />
             <End Role="Grades" EntitySet="Grades" />
@@ -171,6 +130,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK_Subjects_Course" FromRole="Courses" ToRole="Subjects" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -202,7 +162,6 @@
           <Property Name="Fk_TeacherId" Type="Int32" />
           <NavigationProperty Name="Cours" Relationship="Self.FK_Subjects_Course" FromRole="Subjects" ToRole="Courses" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK_Subjects_Teacher" FromRole="Subjects" ToRole="Teachers" />
-          <NavigationProperty Name="Students" Relationship="Self.Enrollments" FromRole="Subjects" ToRole="Students" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -261,10 +220,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Enrollments">
-          <End Role="Students" Type="Self.Student" Multiplicity="*" />
-          <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="MagniFinanceEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Courses" EntityType="MagniFinanceModel.Course" />
           <EntitySet Name="Grades" EntityType="Self.Grade" />
@@ -285,10 +240,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Subjects_Teacher" Association="Self.FK_Subjects_Teacher">
             <End Role="Teachers" EntitySet="Teachers" />
-            <End Role="Subjects" EntitySet="Subjects" />
-          </AssociationSet>
-          <AssociationSet Name="Enrollments" Association="Self.Enrollments">
-            <End Role="Students" EntitySet="Students" />
             <End Role="Subjects" EntitySet="Subjects" />
           </AssociationSet>
         </EntityContainer>
@@ -345,14 +296,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Enrollments" TypeName="MagniFinanceModel.Enrollments" StoreEntitySet="Enrollments">
-            <EndProperty Name="Students">
-              <ScalarProperty Name="Id" ColumnName="StudentId" />
-            </EndProperty>
-            <EndProperty Name="Subjects">
-              <ScalarProperty Name="Id" ColumnName="SubjectId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

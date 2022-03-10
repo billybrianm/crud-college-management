@@ -5,6 +5,8 @@
     $scope.currentCourse = '';
     $scope.currentTeacher = '';
 
+    $scope.currentSubject = {};
+
     $scope.subject = {
         Name: '',
         
@@ -35,6 +37,17 @@
             $scope.Subjects = result.data;
         }, function (error) {
             alert("There was an error fetching the subjects." + error);
+        })
+    };
+
+    $scope.getSubject = function(Id) {
+        subjectService.getSubject(Id).then(function (result) {
+
+            $scope.currentSubject = result.data;
+
+            $scope.Students = $scope.currentSubject.Students;
+        }, function (error) {
+            alert("There was an error fetching the subject." + error);
         })
     };
 

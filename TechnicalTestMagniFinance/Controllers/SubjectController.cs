@@ -24,6 +24,20 @@ namespace TechnicalTestMagniFinance.Controllers
             }
         }
 
+        // List Subject with Students
+        // GET Subject/GetSubject
+        [HttpGet]
+        public JsonResult GetSubject(int Id)
+        {
+            using (var db = new MagniFinanceEntities())
+            {
+                Subject subject = db.Subjects.Include(sub => sub.Students).Where(sub => sub.Id == Id).First();
+
+
+                return Json(subject, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         // Insert a Subject
         // POST Subject/InsertSubject
         [HttpPost]

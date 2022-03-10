@@ -4,17 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="984b2e17fb3e4258950554eae40aad3c" Name="Diagram1">
+      <Diagram DiagramId="c7f9897c1cbb4dd69bce60112665d784" Name="Diagram1">
         <EntityTypeShape EntityType="MagniFinanceModel.Course" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MagniFinanceModel.Grade" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="MagniFinanceModel.Student" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="MagniFinanceModel.Subject" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MagniFinanceModel.Teacher" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagniFinanceModel.Grade" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagniFinanceModel.Student" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagniFinanceModel.Subject" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagniFinanceModel.Teacher" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <AssociationConnector Association="MagniFinanceModel.FK_Subjects_Course" ManuallyRouted="false" />
         <AssociationConnector Association="MagniFinanceModel.FK_Grade_Student" ManuallyRouted="false" />
         <AssociationConnector Association="MagniFinanceModel.FK_Grade_Subject" ManuallyRouted="false" />
         <AssociationConnector Association="MagniFinanceModel.FK_Subjects_Teacher" ManuallyRouted="false" />
-        <AssociationConnector Association="MagniFinanceModel.Enrollments" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
