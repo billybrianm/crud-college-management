@@ -5,7 +5,7 @@
 
 <h2>Home</h2>
 
-<div class="container">
+<div class="container" ng-cloak ng-controller="homeController">
     <div id="accordion">
         <div class="card">
             <div class="card-header" id="headingOne">
@@ -17,7 +17,7 @@
             </div>
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body" ng-controller="courseController">
+                <div class="card-body">
                     <table class="table table-bordered">
                         <thead style="background-color: crimson;">
                             <tr>
@@ -31,9 +31,9 @@
                         <tbody>
                             <tr ng-repeat="course in Courses">
                                 <td>{{course.Name}}</td>
-                                <td>{{course.Name}}</td>
-                                <td>{{course.Name}}</td>
-                                <td>{{course.Name}}</td>
+                                <td>{{course.TeacherCount}}</td>
+                                <td>{{course.StudentCount}}</td>
+                                <td>{{course.AverageGrades}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -49,7 +49,7 @@
                 </h5>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                <div class="card-body" ng-controller="subjectController">
+                <div class="card-body">
                     <table class="table table-bordered">
                         <thead style="background-color: green;">
                             <tr>
@@ -62,10 +62,16 @@
 
                         <tbody>
                             <tr ng-repeat="sub in Subjects">
-                                <td>{{sub.Name}}</td>
-                                <td>{{sub.Name}}</td>
-                                <td>{{sub.Name}}</td>
-                                <td>{{sub.Name}}</td>
+                                <td>{{sub.SubjectName}}</td>
+                                <td>
+                                    <a href="#" ng-click="teacherInfos(sub)" data-target="#teacherInfos"
+                                       data-toggle="modal">{{sub.TeacherName}}</a>
+                                </td>
+                                <td>{{sub.StudentCount}}</td>
+                                <td style="width: 200px;">
+                                    <a href="#" class="btn btn-primary" data-target="#modalSubjectStudentGrades"
+                                       data-toggle="modal" ng-click="subjectStudentGrades(sub.SubjectId)">Grades</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -81,21 +87,24 @@
                 </h5>
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body" ng-controller="studentController">
+                <div class="card-body">
                     <table class="table table-bordered">
                         <thead style="background-color: cornflowerblue;">
                             <tr>
+                                <th>Registration Number</th>
                                 <th>Name</th>
+                                <th>Grades</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr ng-repeat="stud in Students">
+                                <td style="width: 70px">{{stud.Reg_number}}</td>
                                 <td>{{stud.Name}}</td>
 
                                 <td style="width: 200px;">
-                                    <a href="#" class="btn btn-primary" data-target="#updateStudent"
-                                       data-toggle="modal" ng-click="updateScopeStudent(stud.Id)">Grades</a>
+                                    <a href="#" class="btn btn-primary" data-target="#modalStudentGrades"
+                                       data-toggle="modal" ng-click="studentGrades(stud)">Grades</a>
                                 </td>
 
                             </tr>
@@ -105,16 +114,112 @@
             </div>
         </div>
     </div>
+    @* BEGIN MODAL - TEACHER INFOS *@
+    <div class="modal" id="teacherInfos" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Teacher Information</h3>
+                </div>
+                <div class="modal-body" style="margin-left: 20px">
+                    <form class="form-horizontal" name="updateTeacherForm">
+                        <div class="form-group">
+                            <input class="form-control" readonly="readonly" name="Id" ng-model="updateTeacherId" type="hidden" placeholder="Id" />
+                        </div>
+                        <div class="form-group">
+                            <label> Name</label>
+                            <input class="form-control" name="Name" ng-model="teacher.TeacherName" type="text" placeholder="Name" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label> Birthday</label>
+                            <input class="form-control" name="Birthday" ng-model="teacher.TeacherBirthday" type="date" placeholder="Birthday" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label> Salary</label>
+                            <input class="form-control" name="Salary" ng-model="teacher.TeacherSalary" type="text" placeholder="Salary" readonly />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - TEACHER INFOS *@
+
+    @* BEGIN MODAL - SUBJECT STUDENT GRADES *@
+    <div class="modal" id="modalSubjectStudentGrades" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Student Grades</h3>
+                </div>
+                <div class="modal-body" style="margin-left: 20px">
+                    <table class="table table-bordered">
+                        <thead style="background-color: slateblue;">
+                            <tr>
+                                <th>Student</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stud in subjectStudents">
+                                <td>{{stud.Name}}</td>
+                                <td>{{stud.GradeValue}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - SUBJECT STUDENT GRADES*@
+
+    @* BEGIN MODAL - STUDENT GRADES *@
+    <div class="modal" id="modalStudentGrades" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>{{student.Name}}'s Grades</h3>
+                </div>
+                <div class="modal-body" style="margin-left: 20px">
+                    <table class="table table-bordered">
+                        <thead style="background-color: slateblue;">
+                            <tr>
+                                <th>Student</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stud in student">
+                                <td>{{stud.SubjectName}}</td>
+                        <td>{{stud.GradeValue}}</td>
+                        </tr>
+                        </tbody>
+                        </table>
 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - STUDENT GRADES*@
+</div>
+
+
+
 
 @section scripts {
     <script src="~/AngularJSApp/College/Modulejs.js"></script>
-    <script src="~/AngularJSApp/College/Course/CourseController.js"></script>
+    <script src="~/AngularJSApp/College/HomeController.js"></script>
     <script src="~/AngularJSApp/College/Course/CourseService.js"></script>
-    <script src="~/AngularJSApp/College/Subject/SubjectController.js"></script>
     <script src="~/AngularJSApp/College/Subject/SubjectService.js"></script>
     <script src="~/AngularJSApp/College/Teacher/TeacherService.js"></script>
-    <script src="~/AngularJSApp/College/Student/StudentController.js"></script>
     <script src="~/AngularJSApp/College/Student/StudentService.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

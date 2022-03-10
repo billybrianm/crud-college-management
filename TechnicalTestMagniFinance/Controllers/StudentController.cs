@@ -22,6 +22,21 @@ namespace TechnicalTestMagniFinance.Controllers
             }
         }
 
+        // Get Student Grades
+        // GET Student/GetStudentGrades
+        [HttpGet]
+        public JsonResult GetStudentGrades(int Id)
+        {
+            using (var db = new MagniFinanceEntities())
+            {
+                var grades = db.Database.SqlQuery<StudentGradesDTO>("SELECT s.Name as SubjectName, g.GradeValue from Subjects s " +
+                                                                    "LEFT JOIN Grades g on g.SubjectId = s.Id " +
+                                                                    "WHERE g.StudentId = " + Id).ToList();
+
+                return Json(grades, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         // Insert a Student
         // POST Student/InsertStudent
         [HttpPost]

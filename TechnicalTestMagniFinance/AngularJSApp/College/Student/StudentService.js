@@ -2,7 +2,11 @@
 
     this.getAllStudents = () => {
         return $http.get("/Student/GetStudents")
-    }
+    };
+
+    this.getStudentGrades = function (Id) {
+        return $http.get("/Student/GetStudentGrades/" + Id);
+    };
 
     this.insertStudent = function (student) {
         let request = $http({
@@ -13,7 +17,7 @@
         });
 
         return request;
-    }
+    };
 
     this.updateStudent = function (student) {
         var updatedRequest = $http({
@@ -26,5 +30,5 @@
 
     this.deleteStudent = function (studentId) {
         return $http.post('/Student/DeleteStudent/' + studentId);
-    }
+    };
 });

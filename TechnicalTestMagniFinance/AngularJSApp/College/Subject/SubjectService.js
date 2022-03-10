@@ -4,6 +4,10 @@
         return $http.get("/Subject/GetSubjects")
     };
 
+    this.getListSubjectInfos = () => {
+        return $http.get("/Subject/GetListSubjectInfos");
+    };
+
     this.getSubject = (Id) => {
         return $http.get("/Subject/GetSubject/" + Id)
     };

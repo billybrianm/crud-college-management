@@ -24,6 +24,23 @@ namespace TechnicalTestMagniFinance.Controllers
             }
         }
 
+        // List Subjects with Infos
+        // GET Subject/GetListSubjectInfos
+        [HttpGet]
+        public JsonResult GetListSubjectInfos()
+        {
+            using (var db = new MagniFinanceEntities())
+            {
+                string query = "select s.Id as SubjectId, s.Name as SubjectName, t.Name as TeacherName, t.Birthday as TeacherBirthday, t.Salary as TeacherSalary, COUNT(g.StudentId) as StudentCount from Subjects s "+
+                                "INNER JOIN Teachers t on s.Fk_TeacherId = t.Id "+
+                                "LEFT JOIN Grades g on g.SubjectId = s.Id "+
+                                "GROUP BY s.Id, s.Name, t.Name, t.Birthday, t.Salary";
+                var subjects = db.Database.SqlQuery<SubjectInfosDTO>(query).ToList();
+
+                return Json(subjects, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         // List Subject with Students
         // GET Subject/GetSubjectStudents
         [HttpGet]
