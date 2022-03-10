@@ -19,7 +19,8 @@
 
             $scope.Courses = result.data;
         }, function (error) {
-            alert("There was an error fetching the courses." + error);
+            $scope.error = true;
+            $scope.errorMessage = "There was an error fetching the courses";
         })
     };
 
@@ -32,10 +33,12 @@
         }
 
         let courseAdded = courseService.insertCourse($scope.course).then(() => {
-            alert('Course added successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Course inserted successfully.";
             $scope.clearData();
         }, function (error) {
-            alert('There was an error adding the course.');
+            $scope.error = true;
+            $scope.errorMessage = "There was an error adding the course.";
         });
     };
 
@@ -49,13 +52,21 @@
     $scope.updateCourse = () => {
 
         courseService.updateCourse($scope.course).then(() => {
-            alert('Course updated successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Course update successfully.";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error updating the course.";
         });
     };
 
     $scope.deleteCourse = function (Id) {
         courseService.deleteCourse(Id).then(() => {
-            alert('Course deleted successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Course deleted successfully.";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error deleting the course.";
         });
     };
 });

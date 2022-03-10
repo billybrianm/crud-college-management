@@ -5,9 +5,20 @@
 
 <h2>Subjects</h2>
 
-<div class="container" ng-controller="subjectController">
+<div class="container" ng-controller="subjectController" ng-cloak>
+    @* SUCCESS AND ERROR MESSAGES *@
+    <div class="alert alert-success alert-dismissible" ng-show="success">
+        <strong>Success!</strong> {{successMessage}}
+        <a href="#" class="btn-close" data-dismiss="alert"></a>
+    </div>
+    <div class="alert alert-danger alert-dismissible" ng-show="error">
+        <strong>Error!</strong> {{errorMessage}}
+        <a href="#" class="btn-close" data-dismiss="alert"></a>
+    </div>
+    @* --------------------------- *@
+
     <div class="panel-body">
-        <button type="button" class="btn btn-info" data-target="#addSubject" data-toggle="modal" ng-click="clearData(); loadReferences();">
+        <button type="button" class="btn btn-primary" data-target="#addSubject" data-toggle="modal" ng-click="clearData(); loadReferences();">
             Add Subject
         </button>
     </div>
@@ -30,7 +41,7 @@
                 <td>{{sub.Teacher.Name}}</td>
 
                 <td style="width: 200px">
-                    <a href="#" class="btn btn-info" data-target="#updateSubject"
+                    <a href="#" class="btn btn-primary" data-target="#updateSubject"
                        data-toggle="modal" ng-click="updateScopeSubject(sub.Id); loadReferences();">Update</a>
                     <a href="#" class="btn btn-danger" ng-click="deleteSubject(sub.Id)">Delete</a>
                 </td>
@@ -45,7 +56,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="text-info">New Subject</h3>
+                    <h3>New Subject</h3>
                 </div>
                 <div class="modal-body" style="margin: auto; width: 50%; ">
                     <form class="form-horizontal" name="addSubjectForm">
@@ -54,24 +65,22 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="text-info"> Name</label>
+                            <label> Name</label>
                             <input class="form-control" type="text" name="nome" ng-model="subject.Name" placeholder="Subject Name" required />
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Course</label>
-                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse" ng-options="course as course.Name for course in Courses track by course.Id">
-                            </select>
+                            <label> Course</label>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse" ng-options="course as course.Name for course in Courses track by course.Id"></select>
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Teacher</label>
-                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentTeacher" ng-options="teacher as teacher.Name for teacher in Teachers track by teacher.Id">                               
-                            </select>
+                            <label> Teacher</label>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentTeacher" ng-options="teacher as teacher.Name for teacher in Teachers track by teacher.Id"></select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="insertSubject()">Add</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearData()">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="clearData()">Cancel</button>
                 </div>
             </div>
         </div>
@@ -83,7 +92,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="text-info">Update Subject</h3>
+                    <h3>Update Subject</h3>
                 </div>
                 <div class="modal-body" style="margin-left: 20px">
                     <form class="form-horizontal" name="updateSubjectForm">
@@ -91,18 +100,16 @@
                             <input class="form-control" readonly="readonly" name="Id" ng-model="updateSubjectId" type="hidden" placeholder="Id" />
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Name</label>
-                            <input class="form-control" name="Name" ng-model="subject.Name" type="text" placeholder="Name" required />
+                            <label> Name</label>
+                            <input class="form-control" name="Name" ng-model="subject.Name" type="text" placeholder="Subject Name" required />
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Course</label>
-                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse" ng-options="course as course.Name for course in Courses track by course.Id">
-                            </select>
+                            <label> Course</label>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse" ng-options="course as course.Name for course in Courses track by course.Id"></select>
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Teacher</label>
-                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentTeacher" ng-options="teacher as teacher.Name for teacher in Teachers track by teacher.Id">
-                            </select>
+                            <label> Teacher</label>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentTeacher" ng-options="teacher as teacher.Name for teacher in Teachers track by teacher.Id"></select>
                         </div>
                     </form>
                 </div>
@@ -110,7 +117,7 @@
                     <button type="button" class="btn btn-primary" id="btnUpdate" data-dismiss="modal" ng-click="updateSubject()">
                         Update
                     </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
@@ -123,6 +130,11 @@
     <script src="~/AngularJSApp/College/Modulejs.js"></script>
     <script src="~/AngularJSApp/College/Subject/SubjectController.js"></script>
     <script src="~/AngularJSApp/College/Subject/SubjectService.js"></script>
+    <script src="~/AngularJSApp/College/Student/StudentService.js"></script>
     <script src="~/AngularJSApp/College/Teacher/TeacherService.js"></script>
     <script src="~/AngularJSApp/College/Course/CourseService.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 }

@@ -1,10 +1,125 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home";
 }
 
+<h2>Home</h2>
+
+<div class="container">
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        List of courses with number of teachers, students, and average grades
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body" ng-controller="courseController">
+                    <table class="table table-bordered">
+                        <thead style="background-color: crimson;">
+                            <tr>
+                                <th>Name</th>
+                                <th>Number of Teachers</th>
+                                <th>Number of Students</th>
+                                <th>Average Grade</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="course in Courses">
+                                <td>{{course.Name}}</td>
+                                <td>{{course.Name}}</td>
+                                <td>{{course.Name}}</td>
+                                <td>{{course.Name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        List of Subjects, Teacher Information and Students
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body" ng-controller="subjectController">
+                    <table class="table table-bordered">
+                        <thead style="background-color: green;">
+                            <tr>
+                                <th>Name</th>
+                                <th>Teacher</th>
+                                <th>Number of Students</th>
+                                <th>Grades</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="sub in Subjects">
+                                <td>{{sub.Name}}</td>
+                                <td>{{sub.Name}}</td>
+                                <td>{{sub.Name}}</td>
+                                <td>{{sub.Name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        List of Students and Grades in Subjects
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body" ng-controller="studentController">
+                    <table class="table table-bordered">
+                        <thead style="background-color: cornflowerblue;">
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="stud in Students">
+                                <td>{{stud.Name}}</td>
+
+                                <td style="width: 200px;">
+                                    <a href="#" class="btn btn-primary" data-target="#updateStudent"
+                                       data-toggle="modal" ng-click="updateScopeStudent(stud.Id)">Grades</a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts {
     <script src="~/AngularJSApp/College/Modulejs.js"></script>
-    <script src="~/AngularJSApp/College/Controller.js"></script>
-    <script src="~/AngularJSApp/College/Service.js"></script>
+    <script src="~/AngularJSApp/College/Course/CourseController.js"></script>
+    <script src="~/AngularJSApp/College/Course/CourseService.js"></script>
+    <script src="~/AngularJSApp/College/Subject/SubjectController.js"></script>
+    <script src="~/AngularJSApp/College/Subject/SubjectService.js"></script>
+    <script src="~/AngularJSApp/College/Teacher/TeacherService.js"></script>
+    <script src="~/AngularJSApp/College/Student/StudentController.js"></script>
+    <script src="~/AngularJSApp/College/Student/StudentService.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 }

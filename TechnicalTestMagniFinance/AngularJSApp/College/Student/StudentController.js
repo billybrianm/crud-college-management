@@ -31,9 +31,9 @@
             });
 
             $scope.Students = result.data;
-        }, function (error) {
-            console.log(error);
-            alert("There was an error fetching the students.");
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error fetching the students.";
         })
     };
 
@@ -49,10 +49,12 @@
         }
 
         let studentAdded = studentService.insertStudent($scope.student).then(() => {
-            alert('Student added successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Student added successfully.";
             $scope.clearData();
-        }, function (error) {
-            alert('There was an error adding the student.');
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error adding the student.";
         });
     };
 
@@ -69,13 +71,21 @@
     $scope.updateStudent = () => {
 
         studentService.updateStudent($scope.student).then(() => {
-            alert('Student updated successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Student updated successfully.";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error updating the Student.";
         });
     };
 
     $scope.deleteStudent = function (Id) {
         studentService.deleteStudent(Id).then(() => {
-            alert('Student deleted successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Student deleted successfully";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error deleting the Student.";
         });
     };
 });

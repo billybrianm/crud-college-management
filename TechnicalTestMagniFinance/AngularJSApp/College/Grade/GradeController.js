@@ -32,9 +32,9 @@
         gradeService.getAllGrades().then(function (result) {
 
             $scope.Grades = result.data;
-        }, function (error) {
-            console.log(error);
-            alert("There was an error fetching the grades." + error);
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error fetching the grades";
         })
     };
 
@@ -51,10 +51,12 @@
         $scope.grade.SubjectId = $scope.currentSubject.Id;
 
         let gradeAdded = gradeService.insertGrade($scope.grade).then(() => {
-            alert('Grade added successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Grade added successfully";
             $scope.clearData();
-        }, function (error) {
-            alert('There was an error adding the grade.');
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error adding the grade";
         });
     };
 
@@ -65,7 +67,7 @@
         $scope.currentCourse = grade.Cours;
         $scope.currentTeacher = grade.Teacher;
 
-        angular.copy(grade, $scope.grade);
+        $scope.grade = angular.copy(grade);
     };
 
     $scope.updateGrade = () => {
@@ -75,13 +77,21 @@
 
 
         gradeService.updateGrade($scope.grade).then(() => {
-            alert('Grade updated successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Grade updated successfully";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error updating the grade.";
         });
     };
 
     $scope.deleteGrade = function (Id) {
         gradeService.deleteGrade(Id).then(() => {
-            alert('Grade deleted successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Grade deleted successfully";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error deleting the grade."
         });
     };
 });

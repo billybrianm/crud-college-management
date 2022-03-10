@@ -30,8 +30,9 @@
             });
 
             $scope.Teachers = result.data;
-        }, function (error) {
-            alert("There was an error fetching the teachers." + error);
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error fetching the teachers.";
         })
     };
 
@@ -48,9 +49,11 @@
         }
 
         teacherService.insertTeacher($scope.teacher).then(() => {
-            alert('Teacher added successfully.');
-        }, function (error) {
-            alert('There was an error adding the teacher.');
+            $scope.success = true;
+            $scope.successMessage = "Teacher added successfully";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error adding the teacher.";
         });
     };
 
@@ -67,13 +70,21 @@
     $scope.updateTeacher = () => {
 
         teacherService.updateTeacher($scope.teacher).then(() => {
-            alert('Teacher updated successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Teacher updated successfully";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error updating the teacher.";
         });
     };
 
     $scope.deleteTeacher = function (Id) {
         teacherService.deleteTeacher(Id).then(() => {
-            alert('Teacher deleted successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Teacher deleted successfully.";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error deleting the teacher.";
         });
     };
 });

@@ -11,7 +11,8 @@
     $scope.clearData = () => {
         $scope.subject = {
             Name: '',
-            
+            Fk_TeacherId: '',
+            Fk_CourseId: ''
         };
     };
 
@@ -57,20 +58,24 @@
         let grade = { SubjectId: $scope.currentSubject.Id, StudentId: $scope.currentStudent.Id, GradeValue: gradeValue };
 
         subjectService.enrollStudent(grade).then((res) => {
-            if(res.status == 200)
-                alert('Student enrolled successfully.');
-        }, function (error) {
-            console.log(error);
-            alert('There was an error enrolling the student.' + error.statusText);
+            if (res.status == 200) {
+                $scope.success = true;
+                $scope.successMessage = "Student enrolled successfully";
+            }                
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = 'There was an error enrolling the student.';
         });
     };
 
     $scope.unenrollStudent = function (StudentId) {
         let grade = { StudentId: StudentId, SubjectId: $scope.currentSubject.Id };
         subjectService.unenrollStudent(grade, $scope.currentSubject.Id).then((res) => {
-            alert('Student unenrolled successfully.');
-        }, function (error) {
-            alert('There was an error unenrolling the student.' + error.statusText);
+            $scope.success = true;
+            $scope.successMessage = "Student unenrolled successfully";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error unenrolling the student";
         });
     };
 
@@ -78,8 +83,9 @@
         subjectService.getAllSubjects().then(function (result) {
 
             $scope.Subjects = result.data;
-        }, function (error) {
-            alert("There was an error fetching the subjects." + error.statusText);
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error fetching the subjects";
         })
     };
 
@@ -87,7 +93,8 @@
         studentService.getAllStudents().then(function (result) {
             $scope.Students = result.data;
         }, function (error) {
-            alert("There was an error fetching the students." + error.statusText);
+            $scope.error = true;
+            $scope.errorMessage = "There was an error fetching the students";
         });
     };
 
@@ -98,7 +105,8 @@
 
             $scope.Students = $scope.currentSubject.Students;
         }, function (error) {
-            alert("There was an error fetching the subject." + error);
+            $scope.error = true;
+            $scope.error = "There was an error fetching the subject";
         })
     };
 
@@ -114,10 +122,12 @@
         $scope.subject.Fk_TeacherId = $scope.currentTeacher.Id;
 
         let subjectAdded = subjectService.insertSubject($scope.subject).then(() => {
-            alert('Subject added successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Subject added successfully";
             $scope.clearData();
-        }, function (error) {
-            alert('There was an error adding the subject.');
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "There was an error adding the subject";
         });
     };
 
@@ -128,7 +138,7 @@
         $scope.currentCourse = subject.Cours;
         $scope.currentTeacher = subject.Teacher;
 
-        angular.copy(subject, $scope.subject);
+        $scope.subject = angular.copy(subject);
     };
 
     $scope.updateSubject = () => {
@@ -138,13 +148,21 @@
 
 
         subjectService.updateSubject($scope.subject).then(() => {
-            alert('Subject updated successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Subject updated successfully";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "Error updating Subject.";
         });
     };
 
     $scope.deleteSubject = function (Id) {
         subjectService.deleteSubject(Id).then(() => {
-            alert('Subject deleted successfully.');
+            $scope.success = true;
+            $scope.successMessage = "Subject deleted successfully";
+        }, function () {
+            $scope.error = true;
+            $scope.errorMessage = "Error deleting Subject.";
         });
     };
 });

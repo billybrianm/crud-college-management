@@ -5,9 +5,20 @@
 
 <h2>Teachers</h2>
 
-<div class="container" ng-controller="teacherController">
+<div class="container" ng-controller="teacherController" ng-cloak>
+    @* SUCCESS AND ERROR MESSAGES *@
+    <div class="alert alert-success alert-dismissible" ng-show="success">
+        <strong>Success!</strong> {{successMessage}}
+        <a href="#" class="btn-close" data-dismiss="alert"></a>
+    </div>
+    <div class="alert alert-danger alert-dismissible" ng-show="error">
+        <strong>Error!</strong> {{errorMessage}}
+        <a href="#" class="btn-close" data-dismiss="alert"></a>
+    </div>
+    @* --------------------------- *@
+
     <div class="panel-body">
-        <button type="button" class="btn btn-info" data-target="#addTeacher" data-toggle="modal">
+        <button type="button" class="btn btn-primary" data-target="#addTeacher" data-toggle="modal">
             Add Teacher
         </button>
     </div>
@@ -30,7 +41,7 @@
                 <td>{{teach.Salary}}</td>
 
                 <td style="width: 200px">
-                    <a href="#" class="btn btn-info" data-target="#updateTeacher"
+                    <a href="#" class="btn btn-primary" data-target="#updateTeacher"
                        data-toggle="modal" ng-click="updateScopeTeacher(teach.Id)">Update</a>
                     <a href="#" class="btn btn-danger" ng-click="deleteTeacher(teach.Id)">Delete</a>
                 </td>
@@ -45,7 +56,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="text-info">New Teacher</h3>
+                    <h3>New Teacher</h3>
                 </div>
                 <div class="modal-body" style="margin: auto; width: 50%; ">
                     <form class="form-horizontal" name="addTeacherForm">
@@ -66,7 +77,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="insertTeacher()">Add</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="clearModal()">Cancel</button>
                 </div>
             </div>
         </div>
@@ -78,7 +89,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="text-info">Update Teacher</h3>
+                    <h3>Update Teacher</h3>
                 </div>
                 <div class="modal-body" style="margin-left: 20px">
                     <form class="form-horizontal" name="updateTeacherForm">
@@ -86,15 +97,15 @@
                             <input class="form-control" readonly="readonly" name="Id" ng-model="updateTeacherId" type="hidden" placeholder="Id" />
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Name</label>
+                            <label> Name</label>
                             <input class="form-control" name="Name" ng-model="teacher.Name" type="text" placeholder="Name" required />
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Birthday</label>
+                            <label> Birthday</label>
                             <input class="form-control" name="Birthday" ng-model="teacher.Birthday" type="date" placeholder="Birthday" required />
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Registration Number</label>
+                            <label> Registration Number</label>
                             <input class="form-control" name="Salary" ng-model="teacher.Salary" type="text" placeholder="Salary" />
                         </div>
                     </form>
@@ -103,7 +114,7 @@
                     <button type="button" class="btn btn-primary" id="btnUpdate" data-dismiss="modal" ng-click="updateTeacher()">
                         Update
                     </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
@@ -116,4 +127,8 @@
     <script src="~/AngularJSApp/College/Modulejs.js"></script>
     <script src="~/AngularJSApp/College/Teacher/TeacherController.js"></script>
     <script src="~/AngularJSApp/College/Teacher/TeacherService.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 }
