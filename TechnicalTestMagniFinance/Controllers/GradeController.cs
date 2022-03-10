@@ -32,11 +32,11 @@ namespace TechnicalTestMagniFinance.Controllers
             {
                 using (var db = new MagniFinanceEntities())
                 {
-                    db.Grades.Add(grade);
+                    Grade newGrade = db.Grades.Add(grade);
 
                     db.SaveChanges();
 
-                    return Json(new { success = true });
+                    return Json(newGrade);
                 }
             }
             return Json(new { success = false });
@@ -84,7 +84,7 @@ namespace TechnicalTestMagniFinance.Controllers
                 db.Grades.Remove(grade);
                 db.SaveChanges();
 
-                return Json(new { success = true });
+                return Json(grade);
             }
         }
     }

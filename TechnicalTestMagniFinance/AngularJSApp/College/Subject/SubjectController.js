@@ -33,6 +33,20 @@
         $scope.$apply();
     });
 
+    $scope.$on('gradeAdded', function (event, grade) {
+
+        $scope.subjectStudents.push(grade);
+        $scope.$apply();
+    });
+
+    $scope.$on('gradeDeleted', function (event, grade) {
+        let index = $scope.subjectStudents.findIndex(element => element.StudentId == grade.StudentId);
+
+        $scope.subjectStudents.splice(index, 1);
+
+        $scope.$apply();
+    });
+
     $scope.clearData = () => {
         $scope.subject = {
             Name: '',
@@ -86,6 +100,7 @@
             if (res.status == 200) {
                 $scope.success = true;
                 $scope.successMessage = "Student enrolled successfully";
+                signalrService.gradeAdded(res.data);
             }                
         }, function () {
             $scope.error = true;
@@ -98,6 +113,7 @@
         subjectService.unenrollStudent(grade, $scope.currentSubject.Id).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Student unenrolled successfully";
+            signalrService.gradeDeleted(res.data);
         }, function () {
             $scope.error = true;
             $scope.errorMessage = "There was an error unenrolling the student";

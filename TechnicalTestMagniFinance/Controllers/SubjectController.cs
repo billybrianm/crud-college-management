@@ -71,7 +71,7 @@ namespace TechnicalTestMagniFinance.Controllers
                 db.Grades.Remove(gradeToRemove);
                 db.SaveChanges();
 
-                return Json(new { success = true });
+                return Json(gradeToRemove);
             }
         }
 

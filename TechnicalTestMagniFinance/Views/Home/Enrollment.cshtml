@@ -20,13 +20,16 @@
     <table class="table table-bordered">
         <thead style="background-color: slateblue;">
             <tr>
-                <th>Subjects</th>
+                <th>Subject</th>
+                <th style="width: 300px">Course</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
         <tbody>
             <tr ng-repeat="subj in Subjects">
                 <td>{{subj.Name}}</td>
+                <td>{{subj.Cours.Name}}</td>
 
                 <td style="width: 300px">
                     <a href="#" class="btn btn-primary" data-target="#addEnrollment"
@@ -91,12 +94,14 @@
                             <tr>
                                 <th>Student</th>
                                 <th>Grade</th>
+                                <th>Course</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="stud in subjectStudents">
                                 <td>{{stud.Name}}</td>
                                 <td>{{stud.GradeValue}}</td>
+                                <td>{{stud.Course.Name}}</td>
 
                                 <td style="width: 30px">
                                     <a href="#" class="btn btn-danger" data-target="#showStudents"
@@ -124,6 +129,8 @@
     <script src="~/AngularJSApp/College/Teacher/TeacherService.js"></script>
     <script src="~/AngularJSApp/College/Course/CourseService.js"></script>
     <script src="~/AngularJSApp/College/Student/StudentService.js"></script>
+    <script src="~/AngularJSApp/College/SignalR.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.3.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

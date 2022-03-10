@@ -58,6 +58,18 @@
                     proxy.on('teacherDeleted', function (teacher) {
                         $rootScope.$broadcast('teacherDeleted', teacher);
                     });
+
+                    proxy.on('gradeAdded', function (grade) {
+                        $rootScope.$broadcast('graderAdded', grade);
+                    });
+
+                    proxy.on('gradeUpdated', function (grade) {
+                        $rootScope.$broadcast('gradeUpdated', grade);
+                    });
+
+                    proxy.on('gradeDeleted', function (grade) {
+                        $rootScope.$broadcast('gradeDeleted', grade);
+                    });
                 },
                 isConnecting: function () {
                     return connection.state === 0;
@@ -104,22 +116,15 @@
                 teacherDeleted: function (teacher) {
                     proxy.invoke('TeacherDeleted', teacher);
                 },
+                gradeAdded: function (grade) {
+                    proxy.invoke('GradeAdded', grade);
+                },
+                gradeUpdated: function (grade) {
+                    proxy.invoke('GradeUpdated', grade);
+                },
+                gradeDeleted: function (grade) {
+                    proxy.invoke('GradeDeleted', grade);
+                },
             }
         }]);
-
-    collegeApp.controller('messageController', function ($scope, signalrService) {
-
-        signalrService.connect();
-        $scope.messages = [];
-
-        $scope.$on('messageAdded', function (event, remetente, destinatario, message) {
-            var mensagem = { de: remetente, para: destinatario, mensagem: message };
-            $scope.messages.push(mensagem);
-            $scope.$apply();
-        });
-
-        $scope.sendMessage = function () {
-            signalrService.sendMessage($scope.remetente, $scope.destinatario, $scope.mensagem);
-        };
-    });
 })()

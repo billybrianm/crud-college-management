@@ -73,5 +73,21 @@ namespace TechnicalTestMagniFinance.SignalR
         {
             Clients.All.teacherDeleted(teacher);
         }
+
+        // Grade SignalR Functions
+        public void GradeAdded(Grade grade)
+        {
+            Clients.All.gradeAdded(grade);
+        }
+
+        public void GradeUpdated(Grade grade)
+        {
+            Clients.All.gradeUpdated(grade);
+        }
+
+        public void GradeDeleted(Grade grade)
+        {
+            Clients.All.gradeDeleted(grade);
+        }
     }
 }
