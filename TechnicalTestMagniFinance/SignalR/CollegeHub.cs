@@ -57,5 +57,21 @@ namespace TechnicalTestMagniFinance.SignalR
         {
             Clients.All.subjectDeleted(subject);
         }
+
+        // Teacher SignalR Functions
+        public void TeacherAdded(Teacher teacher)
+        {
+            Clients.All.teacherAdded(teacher);
+        }
+
+        public void TeacherUpdated(Teacher teacher)
+        {
+            Clients.All.teacherUpdated(teacher);
+        }
+
+        public void TeacherDeleted(Teacher teacher)
+        {
+            Clients.All.teacherDeleted(teacher);
+        }
     }
 }

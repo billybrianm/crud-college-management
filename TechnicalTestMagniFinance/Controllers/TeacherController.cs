@@ -29,10 +29,10 @@ namespace TechnicalTestMagniFinance.Controllers
             {
                 using (var db = new MagniFinanceEntities())
                 {
-                    db.Teachers.Add(teacher);
+                    Teacher newTeacher = db.Teachers.Add(teacher);
                     db.SaveChanges();
 
-                    return Json(new { success = true });
+                    return Json(newTeacher);
                 }
             }
             return Json(new { success = false });
@@ -80,7 +80,7 @@ namespace TechnicalTestMagniFinance.Controllers
                 db.Teachers.Remove(teacher);
                 db.SaveChanges();
 
-                return Json(new { success = true });
+                return Json(teacher);
             }
         }
     }
