@@ -16,7 +16,7 @@ namespace TechnicalTestMagniFinance.Models
     {
         public int StudentId { get; set; }
         public int SubjectId { get; set; }
-        public int GradeValue { get; set; }
+        public decimal GradeValue { get; set; }
     
         public virtual Student Student { get; set; }
         public virtual Subject Subject { get; set; }

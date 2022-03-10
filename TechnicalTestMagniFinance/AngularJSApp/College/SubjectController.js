@@ -49,6 +49,9 @@
             return;
         }
 
+        $scope.subject.Fk_CourseId = $scope.currentCourse.Id;
+        $scope.subject.Fk_TeacherId = $scope.currentTeacher.Id;
+
         let subjectAdded = subjectService.insertSubject($scope.subject).then(() => {
             alert('Subject added successfully.');
             $scope.clearData();

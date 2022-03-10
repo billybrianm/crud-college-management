@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Grade";
+}
+
+<h2>Grades</h2>
+
+<div class="container" ng-controller="gradeController">
+    <div class="panel-body">
+        <button type="button" class="btn btn-info" data-target="#addGrade" data-toggle="modal" ng-click="clearData(); loadReferences();">
+            Add Grade
+        </button>
+    </div>
+
+    <table class="table table-bordered">
+        <thead style="background-color: olivedrab;">
+            <tr>
+                <th>Subject</th>
+                <th>Student</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="gr in Grades">
+                <td>{{gr.Subject.Name}}</td>
+                <td>{{gr.Student.Name}}</td>
+                <td>{{gr.GradeValue}}</td>
+
+                <td style="width: 200px">
+                    <a href="#" class="btn btn-info" data-target="#updateGrade"
+                       data-toggle="modal" ng-click="updateScopeGrade(gr.Id); loadReferences();">Update</a>
+                    <a href="#" class="btn btn-danger" ng-click="deleteGrade(gr.Id)">Delete</a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    @* BEGIN MODAL - ADD GRADE *@
+    <div class="modal" id="addGrade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-info">New Grade</h3>
+                </div>
+                <div class="modal-body" style="margin: auto; width: 50%; ">
+                    <form class="form-horizontal" name="addGradeForm">
+                        <div class="form-group">
+                            <input class="form-control" readonly="readonly" name="Id" type="hidden" placeholder="Id" />
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label class="text-info"> Subject</label>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentSubject" ng-options="subject as subject.Name for subject in Subjects track by subject.Id"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Student</label>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentStudent" ng-options="student as student.Name for student in Students track by student.Id"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Grade</label>
+                            <input class="form-control" type="text" name="nome" ng-model="grade.GradeValue" placeholder="Grade Name" required />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="insertGrade()">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearData()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - ADD GRADE *@
+
+    @* BEGIN MODAL - UPDATE GRADE *@
+    <div class="modal" id="updateGrade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-info">Update Grade</h3>
+                </div>
+                <div class="modal-body" style="margin-left: 20px">
+                    <form class="form-horizontal" name="updateGradeForm">
+                        <div class="form-group">
+                            <input class="form-control" readonly="readonly" name="Id" ng-model="updateGradeId" type="hidden" placeholder="Id" />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Name</label>
+                            <input class="form-control" name="Name" ng-model="grade.Name" type="text" placeholder="Name" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Course</label>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse" ng-options="course as course.Name for course in Courses track by course.Id"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-info"> Teacher</label>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentTeacher" ng-options="teacher as teacher.Name for teacher in Teachers track by teacher.Id"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnUpdate" data-dismiss="modal" ng-click="updateGrade()">
+                        Update
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* END MODAL - UPDATE GRADE*@
+
+</div>
+
+@section scripts {
+    <script src="~/AngularJSApp/College/Modulejs.js"></script>
+    <script src="~/AngularJSApp/College/Grade/GradeController.js"></script>
+    <script src="~/AngularJSApp/College/Grade/GradeService.js"></script>
+    <script src="~/AngularJSApp/College/StudentService.js"></script>
+    <script src="~/AngularJSApp/College/SubjectService.js"></script>
+}

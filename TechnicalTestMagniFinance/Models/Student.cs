@@ -14,21 +14,9 @@ namespace TechnicalTestMagniFinance.Models
     
     public partial class Student
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
-        {
-            this.Grades = new HashSet<Grade>();
-            this.Subjects = new HashSet<Subject>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
         public string Reg_number { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Grade> Grades { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subject> Subjects { get; set; }
     }
 }

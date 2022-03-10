@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MagniFinanceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MagniFinanceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Courses">
           <Key>
             <PropertyRef Name="Id" />
@@ -27,7 +27,7 @@
           </Key>
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="SubjectId" Type="int" Nullable="false" />
-          <Property Name="Grade" Type="int" Nullable="false" />
+          <Property Name="GradeValue" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
@@ -160,7 +160,8 @@
             <End Role="Subjects" EntitySet="Subjects" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MagniFinanceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -178,7 +179,7 @@
           </Key>
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="SubjectId" Type="Int32" Nullable="false" />
-          <Property Name="GradeValue" Type="Int32" Nullable="false" />
+          <Property Name="GradeValue" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="Student" Relationship="Self.FK_Grade_Student" FromRole="Grades" ToRole="Students" />
           <NavigationProperty Name="Subject" Relationship="Self.FK_Grade_Subject" FromRole="Grades" ToRole="Subjects" />
         </EntityType>
@@ -190,19 +191,16 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
           <Property Name="Birthday" Type="DateTime" Precision="3" />
           <Property Name="Reg_number" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Grades" Relationship="Self.FK_Grade_Student" FromRole="Students" ToRole="Grades" />
-          <NavigationProperty Name="Subjects" Relationship="Self.Enrollments" FromRole="Students" ToRole="Subjects" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
           <Property Name="Fk_CourseId" Type="Int32" />
           <Property Name="Fk_TeacherId" Type="Int32" />
           <NavigationProperty Name="Cours" Relationship="Self.FK_Subjects_Course" FromRole="Subjects" ToRole="Courses" />
-          <NavigationProperty Name="Grades" Relationship="Self.FK_Grade_Subject" FromRole="Subjects" ToRole="Grades" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK_Subjects_Teacher" FromRole="Subjects" ToRole="Teachers" />
           <NavigationProperty Name="Students" Relationship="Self.Enrollments" FromRole="Subjects" ToRole="Students" />
         </EntityType>
@@ -313,7 +311,7 @@
               <MappingFragment StoreEntitySet="Grades">
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="GradeValue" ColumnName="Grade" />
+                <ScalarProperty Name="GradeValue" ColumnName="GradeValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
@@ -136,44 +137,47 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Colleges.Context.cs">
+    <Compile Include="Models\College.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Colleges.Context.tt</DependentUpon>
+      <DependentUpon>College.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Colleges.cs">
+    <Compile Include="Models\College.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Colleges.tt</DependentUpon>
+      <DependentUpon>College.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Colleges.Designer.cs">
+    <Compile Include="Models\College.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Colleges.edmx</DependentUpon>
+      <DependentUpon>College.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Course.cs">
-      <DependentUpon>Colleges.tt</DependentUpon>
+      <DependentUpon>College.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grade.cs">
-      <DependentUpon>Colleges.tt</DependentUpon>
+      <DependentUpon>College.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
-      <DependentUpon>Colleges.tt</DependentUpon>
+      <DependentUpon>College.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Subject.cs">
-      <DependentUpon>Colleges.tt</DependentUpon>
+      <DependentUpon>College.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">
-      <DependentUpon>Colleges.tt</DependentUpon>
+      <DependentUpon>College.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AngularJSApp\College\CourseController.js" />
     <Content Include="AngularJSApp\College\CourseService.js" />
+    <Content Include="AngularJSApp\College\Grade\GradeController.js" />
+    <Content Include="AngularJSApp\College\Grade\GradeService.js" />
     <Content Include="AngularJSApp\College\StudentController.js" />
     <Content Include="AngularJSApp\College\Modulejs.js" />
     <Content Include="AngularJSApp\College\StudentService.js" />
+    <Content Include="AngularJSApp\College\Student\Students.js" />
     <Content Include="AngularJSApp\College\SubjectController.js" />
     <Content Include="AngularJSApp\College\SubjectService.js" />
     <Content Include="AngularJSApp\College\TeacherController.js" />
@@ -186,15 +190,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Colleges.Context.tt">
+    <Content Include="Models\College.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Colleges.edmx</DependentUpon>
-      <LastGenOutput>Colleges.Context.cs</LastGenOutput>
+      <DependentUpon>College.edmx</DependentUpon>
+      <LastGenOutput>College.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Colleges.tt">
+    <Content Include="Models\College.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Colleges.edmx</DependentUpon>
-      <LastGenOutput>Colleges.cs</LastGenOutput>
+      <DependentUpon>College.edmx</DependentUpon>
+      <LastGenOutput>College.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\angular-datepicker.js" />
     <Content Include="Scripts\angular-mocks.js" />
@@ -203,12 +207,12 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
-    <EntityDeploy Include="Models\Colleges.edmx">
+    <EntityDeploy Include="Models\College.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Colleges.Designer.cs</LastGenOutput>
+      <LastGenOutput>College.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Colleges.edmx.diagram">
-      <DependentUpon>Colleges.edmx</DependentUpon>
+    <Content Include="Models\College.edmx.diagram">
+      <DependentUpon>College.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -239,10 +243,12 @@
     <Content Include="Views\Home\Teacher.cshtml" />
     <Content Include="Views\Home\Course.cshtml" />
     <Content Include="Views\Home\Subject.cshtml" />
+    <Content Include="Views\Home\Grade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Course\" />
+    <Folder Include="Views\Grade\" />
     <Folder Include="Views\Subject\" />
     <Folder Include="Views\Teacher\" />
   </ItemGroup>
