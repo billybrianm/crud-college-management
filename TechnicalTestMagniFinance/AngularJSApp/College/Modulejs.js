@@ -2,5 +2,5 @@
 
 (function () {
     collegeApp = angular.module('college', []);
-    demoApp = angular.module('autocompleteDemo', ['ngMaterial'])
+    collegeApp.value('$', $);
 })();

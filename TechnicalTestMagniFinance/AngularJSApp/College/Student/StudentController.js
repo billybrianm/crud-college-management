@@ -1,7 +1,37 @@
-﻿collegeApp.controller('studentController', function ($scope, studentService) {
+﻿collegeApp.controller('studentController', function ($, $scope, studentService, signalrService) {
 
     getStudents();
 
+    signalrService.connect();
+
+    $scope.$on('studentAdded', function (event, student) {
+        student.Birthday = new Date(student.Birthday);
+
+        student.Birthday = student.Birthday.toLocaleDateString();
+
+        $scope.Students.push(student);
+        $scope.$apply();
+    });
+
+    $scope.$on('studentUpdated', function (event, student) {
+        let index = $scope.Students.findIndex(element => element.Id == student.Id);
+
+        student.Birthday = new Date(student.Birthday);
+
+        student.Birthday = student.Birthday.toLocaleDateString();
+
+        $scope.Students[index] = student;
+
+        $scope.$apply();
+    });
+
+    $scope.$on('studentDeleted', function (event, student) {
+        let index = $scope.Students.findIndex(element => element.Id == student.Id);
+
+        $scope.Students.splice(index, 1);
+
+        $scope.$apply();
+    });
 
     $scope.student = {
         Name: '',
@@ -48,14 +78,16 @@
             return ;
         }
 
-        let studentAdded = studentService.insertStudent($scope.student).then(() => {
+        let studentAdded = studentService.insertStudent($scope.student).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Student added successfully.";
+            signalrService.studentAdded(res.data);
             $scope.clearData();
         }, function () {
             $scope.error = true;
             $scope.errorMessage = "There was an error adding the student.";
-        });
+            });
+        
     };
 
     $scope.updateScopeStudent = function (Id) {
@@ -70,9 +102,10 @@
 
     $scope.updateStudent = () => {
 
-        studentService.updateStudent($scope.student).then(() => {
+        studentService.updateStudent($scope.student).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Student updated successfully.";
+            signalrService.studentUpdated(res.data);
         }, function () {
             $scope.error = true;
             $scope.errorMessage = "There was an error updating the Student.";
@@ -80,9 +113,10 @@
     };
 
     $scope.deleteStudent = function (Id) {
-        studentService.deleteStudent(Id).then(() => {
+        studentService.deleteStudent(Id).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Student deleted successfully";
+            signalrService.studentDeleted(res.data);
         }, function () {
             $scope.error = true;
             $scope.errorMessage = "There was an error deleting the Student.";

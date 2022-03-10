@@ -1,17 +1,29 @@
 ﻿(function () {
     collegeApp.value('$', $);
 
-    collegeApp.factory('signalService', ['$', '$rootScope',
+    collegeApp.factory('signalrService', ['$', '$rootScope',
         function ($, $rootScope) {
             var proxy;
             var connection;
             return {
                 connect: function () {
                     connection = $.hubConnection();
-                    proxy = connection.createHubProxy('HubMessage');
+                    proxy = connection.createHubProxy('collegeHub');
                     connection.start();
                     proxy.on('messageAdded', function (remetente, destinatario, message) {
                         $rootScope.$broadcast('messageAdded', remetente, destinatario, message);
+                    });
+
+                    proxy.on('studentAdded', function (student) {
+                        $rootScope.$broadcast('studentAdded', student);
+                    });
+
+                    proxy.on('studentUpdated', function (student) {
+                        $rootScope.$broadcast('studentUpdated', student);
+                    });
+
+                    proxy.on('studentDeleted', function (student) {
+                        $rootScope.$broadcast('studentDeleted', student);
                     });
                 },
                 isConnecting: function () {
@@ -23,15 +35,21 @@
                 connectionState: function () {
                     return connection.state;
                 },
-                sendMessage: function (remetente, destinatario, message) {
-                    proxy.invoke('SendMessage', remetente, destinatario, message);
+                studentAdded: function (student) {
+                    proxy.invoke('StudentAdded', student);
+                },
+                studentUpdated: function (student) {
+                    proxy.invoke('StudentUpdated', student);
+                },
+                studentDeleted: function (student) {
+                    proxy.invoke('StudentDeleted', student);
                 },
             }
         }]);
 
-    collegeApp.controller('messageController', function ($scope, signalService) {
+    collegeApp.controller('messageController', function ($scope, signalrService) {
 
-        signalService.connect();
+        signalrService.connect();
         $scope.messages = [];
 
         $scope.$on('messageAdded', function (event, remetente, destinatario, message) {
@@ -41,7 +59,7 @@
         });
 
         $scope.sendMessage = function () {
-            signalService.sendMessage($scope.remetente, $scope.destinatario, $scope.mensagem);
+            signalrService.sendMessage($scope.remetente, $scope.destinatario, $scope.mensagem);
         };
     });
 })()
