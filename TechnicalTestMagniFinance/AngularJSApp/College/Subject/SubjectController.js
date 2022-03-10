@@ -1,16 +1,11 @@
-﻿collegeApp.controller('subjectController', function ($scope, subjectService, teacherService, courseService) {
+﻿collegeApp.controller('subjectController', function ($scope, subjectService, teacherService, courseService, studentService) {
 
     getSubjects();
+    getStudents();
 
     $scope.currentCourse = '';
     $scope.currentTeacher = '';
-
     $scope.currentSubject = {};
-
-    $scope.subject = {
-        Name: '',
-        
-    };
 
 
     $scope.clearData = () => {
@@ -31,13 +26,69 @@
         });
     };
 
+    $scope.getSubjectStudents = function(subj) {
+        subjectService.getSubjectStudents(subj.Id).then((res) => {
+            $scope.subjectStudents = res.data;
+
+            $scope.currentSubject = subj;
+        });
+    };
+
+    $scope.setSubjectEnrollment = async function (subj) {
+        $scope.currentSubject = subj;
+
+        subjectService.getSubjectStudents(subj.Id).then((res) => {
+            $scope.subjectStudents = res.data;
+
+            const difference = $scope.Students.filter(({ Id: id1 }) => !$scope.subjectStudents.some(({ Id: id2 }) => id2 === id1));
+
+            $scope.subjectStudents = difference;
+        });
+
+        
+    };
+
+    $scope.enrollStudent = () => {
+
+        let gradeValue = null;
+        if (typeof $scope.grade != "undefined")
+            gradeValue = $scope.grade.GradeValue;
+
+        let grade = { SubjectId: $scope.currentSubject.Id, StudentId: $scope.currentStudent.Id, GradeValue: gradeValue };
+
+        subjectService.enrollStudent(grade).then((res) => {
+            if(res.status == 200)
+                alert('Student enrolled successfully.');
+        }, function (error) {
+            console.log(error);
+            alert('There was an error enrolling the student.' + error.statusText);
+        });
+    };
+
+    $scope.unenrollStudent = function (StudentId) {
+        let grade = { StudentId: StudentId, SubjectId: $scope.currentSubject.Id };
+        subjectService.unenrollStudent(grade, $scope.currentSubject.Id).then((res) => {
+            alert('Student unenrolled successfully.');
+        }, function (error) {
+            alert('There was an error unenrolling the student.' + error.statusText);
+        });
+    };
+
     function getSubjects() {
         subjectService.getAllSubjects().then(function (result) {
 
             $scope.Subjects = result.data;
         }, function (error) {
-            alert("There was an error fetching the subjects." + error);
+            alert("There was an error fetching the subjects." + error.statusText);
         })
+    };
+
+    function getStudents() {
+        studentService.getAllStudents().then(function (result) {
+            $scope.Students = result.data;
+        }, function (error) {
+            alert("There was an error fetching the students." + error.statusText);
+        });
     };
 
     $scope.getSubject = function(Id) {
@@ -53,9 +104,6 @@
 
 
     $scope.insertSubject = () => {
-
-        
-
         if (!$scope.addSubjectForm.$valid) {
 
             alert('All fields are required!');

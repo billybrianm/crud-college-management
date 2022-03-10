@@ -1,16 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Enrollment";
+    ViewBag.Title = "Grades";
 }
 
-<h2>Enrollments</h2>
+<h2>Grades</h2>
 
 <div class="container" ng-controller="subjectController">
-    <div class="panel-body">
-        <button type="button" class="btn btn-info" data-target="#addEnrollment" data-toggle="modal" ng-click="clearData()">
-            Enroll Student
-        </button>
-    </div>
 
     <table class="table table-bordered">
         <thead style="background-color: slateblue;">
@@ -23,9 +18,11 @@
             <tr ng-repeat="subj in Subjects">
                 <td>{{subj.Name}}</td>
 
-                <td style="width: 200px">
+                <td style="width: 270px">
+                    <a href="#" class="btn btn-info" data-target="#addEnrollment"
+                       data-toggle="modal" ng-click="clearData(); setSubjectEnrollment(subj)">Enroll Student</a>
                     <a href="#" class="btn btn-success" data-target="#showStudents"
-                       data-toggle="modal" ng-click="getSubject(subj.Id)">View</a>
+                       data-toggle="modal" ng-click="getSubjectStudents(subj)">View Students</a>
                 </td>
 
             </tr>
@@ -33,43 +30,45 @@
     </table>
 
 
-    @* BEGIN MODAL - ADD STUDENT *@
+    @* BEGIN MODAL - ENROLL STUDENT *@
     <div class="modal" id="addEnrollment" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="text-info">New Enrollment</h3>
+                    <h3 class="text-info">Enroll Student</h3>
                 </div>
                 <div class="modal-body" style="margin: auto; width: 50%; ">
-                    <form class="form-horizontal" name="addEnrollmentForm">
+                    <form class="form-horizontal" name="addGradeForm">
                         <div class="form-group">
                             <input class="form-control" readonly="readonly" name="Id" type="hidden" placeholder="Id" />
                         </div>
 
+
+
                         <div class="form-group">
-                            <label class="text-info"> Name</label>
-                            <input class="form-control" type="text" name="nome" ng-model="enrollment.Name" placeholder="Enrollment Name" required />
+                            <label class="text-info"> Subject</label>
+                            <input class="form-control" name="courseSelect" id="courseSelect" type="text" readonly ng-model="currentSubject.Name" />
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Birthday</label>
-                            <input class="form-control" type="date" name="Birthday" ng-model="enrollment.Birthday" placeholder="YYYY-MM-DD" required />
+                            <label class="text-info"> Student</label>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentStudent" ng-options="student as student.Name for student in subjectStudents track by student.Id"></select>
                         </div>
                         <div class="form-group">
-                            <label class="text-info"> Registration Number</label>
-                            <input class="form-control" type="text" name="nome" ng-model="enrollment.Reg_number" placeholder="Registration Number" required />
+                            <label class="text-info"> Grade</label>
+                            <input class="form-control" type="text" name="nome" ng-model="grade.GradeValue" placeholder="Grade Name" required />
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="insertEnrollment()">Add</button>
+                    <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="enrollStudent()">Add</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearData()">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
-    @* END MODAL - ADD STUDENT *@
+    @* END MODAL - ENROLL STUDENT *@
 
-    @* BEGIN MODAL - UPDATE STUDENT *@
+    @* BEGIN MODAL - VIEW STUDENTS *@
     <div class="modal" id="showStudents" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -81,15 +80,17 @@
                         <thead style="background-color: slateblue;">
                             <tr>
                                 <th>Student</th>
+                                <th>Grade</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stud in Students">
+                            <tr ng-repeat="stud in subjectStudents">
                                 <td>{{stud.Name}}</td>
+                                <td>{{stud.GradeValue}}</td>
 
                                 <td style="width: 30px">
                                     <a href="#" class="btn btn-danger" data-target="#showStudents"
-                                       data-toggle="modal" ng-click="updateScopeEnrollment(stud.Id)">Unenroll</a>
+                                       data-toggle="modal" ng-click="unenrollStudent(stud.Id)">Unenroll</a>
                                 </td>
 
                             </tr>
@@ -102,7 +103,7 @@
             </div>
         </div>
     </div>
-    @* END MODAL - UPDATE STUDENT*@
+    @* END MODAL - VIEW STUDENTS*@
 
 </div>
 
@@ -112,5 +113,6 @@
     <script src="~/AngularJSApp/College/Subject/SubjectService.js"></script>
     <script src="~/AngularJSApp/College/Teacher/TeacherService.js"></script>
     <script src="~/AngularJSApp/College/Course/CourseService.js"></script>
+    <script src="~/AngularJSApp/College/Student/StudentService.js"></script>
 
 }

@@ -1,19 +1,8 @@
 ﻿collegeApp.service('gradeService', function ($http) {
 
     this.getAllGrades = () => {
-        return $http.get("/Grade/GetGrades")
-    }
-
-    this.insertGrade = function (grade) {
-        let request = $http({
-            method: 'post',
-            url: '/Grade/InsertGrade',
-            data: grade
-
-        });
-
-        return request;
-    }
+        return $http.get("/Grade/GetGrades");
+    };    
 
     this.updateGrade = function (grade) {
         var updatedRequest = $http({
@@ -22,9 +11,9 @@
             data: grade
         });
         return updatedRequest;
-    };
+    };    
 
     this.deleteGrade = function (gradeId) {
         return $http.post('/Grade/DeleteGrade/' + gradeId);
-    }
+    };
 });

@@ -7,18 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TechnicalTestMagniFinance.Views.Grade
+namespace TechnicalTestMagniFinance.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Grade
+    public partial class Student
     {
-        public int StudentId { get; set; }
-        public int SubjectId { get; set; }
-        public decimal GradeValue { get; set; }
-    
-        public virtual Student Student { get; set; }
-        public virtual Subject Subject { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public Nullable<System.DateTime> Birthday { get; set; }
+        public string Reg_number { get; set; }
     }
 }

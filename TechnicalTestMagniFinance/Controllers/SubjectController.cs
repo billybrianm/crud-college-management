@@ -25,16 +25,36 @@ namespace TechnicalTestMagniFinance.Controllers
         }
 
         // List Subject with Students
-        // GET Subject/GetSubject
+        // GET Subject/GetSubjectStudents
         [HttpGet]
-        public JsonResult GetSubject(int Id)
+        public JsonResult GetSubjectStudents(int Id)
         {
             using (var db = new MagniFinanceEntities())
             {
-                Subject subject = db.Subjects.Include(sub => sub.Students).Where(sub => sub.Id == Id).First();
+                var students = db.Database.SqlQuery<StudentDTO>("SELECT s.Id, s.Name, g.GradeValue from Students s INNER JOIN Grades g on (s.Id = g.StudentId) WHERE SubjectId = " + Id).ToList();
 
+                return Json(students, JsonRequestBehavior.AllowGet);
+            }
+        }
 
-                return Json(subject, JsonRequestBehavior.AllowGet);
+        // Unenroll student from subject
+        // POST Subject/UnenrollStudent
+        [HttpPost]
+        public JsonResult UnenrollStudent(Grade grade)
+        {
+            using (var db = new MagniFinanceEntities())
+            {
+                var gradeToRemove = db.Grades.Find(grade.StudentId, grade.SubjectId);
+
+                if (gradeToRemove == null)
+                {
+                    return Json(new { success = false });
+                }
+
+                db.Grades.Remove(gradeToRemove);
+                db.SaveChanges();
+
+                return Json(new { success = true });
             }
         }
 

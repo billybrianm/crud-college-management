@@ -137,6 +137,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudentDTO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\College.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -167,7 +169,6 @@
     <Compile Include="Models\Teacher.cs">
       <DependentUpon>College.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AngularJSApp\College\Course\CourseController.js" />
@@ -189,16 +190,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\College.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>College.edmx</DependentUpon>
-      <LastGenOutput>College.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\College.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>College.edmx</DependentUpon>
-      <LastGenOutput>College.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\angular-datepicker.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
@@ -206,13 +197,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
-    <EntityDeploy Include="Models\College.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>College.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\College.edmx.diagram">
-      <DependentUpon>College.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -224,6 +208,16 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Models\College.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>College.edmx</DependentUpon>
+      <LastGenOutput>College.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\College.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>College.edmx</DependentUpon>
+      <LastGenOutput>College.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -244,6 +238,13 @@
     <Content Include="Views\Home\Subject.cshtml" />
     <Content Include="Views\Home\Grade.cshtml" />
     <Content Include="Views\Home\Enrollment.cshtml" />
+    <EntityDeploy Include="Models\College.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>College.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\College.edmx.diagram">
+      <DependentUpon>College.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

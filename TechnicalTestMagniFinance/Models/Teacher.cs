@@ -7,19 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TechnicalTestMagniFinance.Views.Grade
+namespace TechnicalTestMagniFinance.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Subject
+    public partial class Teacher
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Fk_CourseId { get; set; }
-        public Nullable<int> Fk_TeacherId { get; set; }
-    
-        public virtual Course Cours { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public Nullable<System.DateTime> Birthday { get; set; }
+        public Nullable<decimal> Salary { get; set; }
     }
 }

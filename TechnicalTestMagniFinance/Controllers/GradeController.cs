@@ -34,11 +34,6 @@ namespace TechnicalTestMagniFinance.Controllers
                 {
                     db.Grades.Add(grade);
 
-                    Subject su = db.Subjects.Find(grade.SubjectId);
-                    Student stu = db.Students.Find(grade.StudentId);
-
-                    su.Students.Add(stu);
-
                     db.SaveChanges();
 
                     return Json(new { success = true });

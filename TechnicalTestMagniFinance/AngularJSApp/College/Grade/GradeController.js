@@ -26,7 +26,7 @@
         studentService.getAllStudents().then((res) => {
             $scope.Students = res.data;
         });
-    };
+    };    
 
     function getGrades() {
         gradeService.getAllGrades().then(function (result) {
@@ -37,6 +37,7 @@
             alert("There was an error fetching the grades." + error);
         })
     };
+
 
 
     $scope.insertGrade = () => {
