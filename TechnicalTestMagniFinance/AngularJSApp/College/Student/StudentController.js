@@ -1,4 +1,4 @@
-﻿collegeApp.controller('studentController', function ($, $scope, studentService, signalrService) {
+﻿collegeApp.controller('studentController', function ($scope, studentService, signalrService) {
 
     getStudents();
 
