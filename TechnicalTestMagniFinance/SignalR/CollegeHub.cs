@@ -9,6 +9,8 @@ namespace TechnicalTestMagniFinance.SignalR
 {
     public class CollegeHub : Hub
     {
+
+        // Student SignalR Functions
         public void StudentAdded(Student student)
         {
             Clients.All.studentAdded(student);
@@ -22,6 +24,22 @@ namespace TechnicalTestMagniFinance.SignalR
         public void StudentDeleted(Student student)
         {
             Clients.All.studentDeleted(student);
+        }
+
+        // Course SignalR Functions
+        public void CourseAdded(Course course)
+        {
+            Clients.All.courseAdded(course);
+        }
+
+        public void CourseUpdated(Course course)
+        {
+            Clients.All.courseUpdated(course);
+        }
+
+        public void CourseDeleted(Course course)
+        {
+            Clients.All.courseDeleted(course);
         }
     }
 }

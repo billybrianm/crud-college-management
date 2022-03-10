@@ -10,9 +10,6 @@
                     connection = $.hubConnection();
                     proxy = connection.createHubProxy('collegeHub');
                     connection.start();
-                    proxy.on('messageAdded', function (remetente, destinatario, message) {
-                        $rootScope.$broadcast('messageAdded', remetente, destinatario, message);
-                    });
 
                     proxy.on('studentAdded', function (student) {
                         $rootScope.$broadcast('studentAdded', student);
@@ -24,6 +21,18 @@
 
                     proxy.on('studentDeleted', function (student) {
                         $rootScope.$broadcast('studentDeleted', student);
+                    });
+
+                    proxy.on('courseAdded', function (course) {
+                        $rootScope.$broadcast('courseAdded', course);
+                    });
+
+                    proxy.on('courseUpdated', function (course) {
+                        $rootScope.$broadcast('courseUpdated', course);
+                    });
+
+                    proxy.on('courseDeleted', function (course) {
+                        $rootScope.$broadcast('courseDeleted', course);
                     });
                 },
                 isConnecting: function () {
@@ -43,6 +52,15 @@
                 },
                 studentDeleted: function (student) {
                     proxy.invoke('StudentDeleted', student);
+                },
+                courseAdded: function (course) {
+                    proxy.invoke('CourseAdded', course);
+                },
+                courseUpdated: function (course) {
+                    proxy.invoke('CourseUpdated', course);
+                },
+                courseDeleted: function (course) {
+                    proxy.invoke('CourseDeleted', course);
                 },
             }
         }]);
