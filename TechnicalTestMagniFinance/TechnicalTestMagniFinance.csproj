@@ -204,6 +204,10 @@
     <Content Include="AngularJSApp\College\Subject\SubjectService.js" />
     <Content Include="AngularJSApp\College\Teacher\TeacherController.js" />
     <Content Include="AngularJSApp\College\Teacher\TeacherService.js" />
+    <Content Include="App_Data\MagniFinance.mdf" />
+    <Content Include="App_Data\MagniFinance_log.ldf">
+      <DependentUpon>MagniFinance.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -312,7 +316,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Course\" />
     <Folder Include="Views\Grade\" />
     <Folder Include="Views\Subject\" />
