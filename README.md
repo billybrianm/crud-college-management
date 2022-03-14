@@ -1,4 +1,7 @@
 ### college-management
+
+------------
+
 #### Purpose
 This is a web application designed for managing a simple college system with the following models: 
 
@@ -28,4 +31,12 @@ Make sure all dependencies are installed and in the right versions, then clone t
 or
 `build and run x86.bat` (x86)
 
-If you want to use Visual Studio, simply import the solution (TechnicalTestMagniFinance.sln), compile and Run/Debug.
+If you want to use Visual Studio 2017, simply import the solution (TechnicalTestMagniFinance.sln), compile and Run/Debug.
+
+
+#### Tests
+To run Tests, you can use CLI dotnet like so:
+
+`dotnet test`
+
+Or you can open the solution in Visual Studio 2017, click on menu **Tests** -> **Execute** -> **All Tests**
