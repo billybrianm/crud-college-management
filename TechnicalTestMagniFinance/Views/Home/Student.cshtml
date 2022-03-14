@@ -26,7 +26,7 @@
     <table class="table table-bordered">
         <thead style="background-color: cornflowerblue;">
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Birthday</th>
                 <th>Registration Number</th>
@@ -36,15 +36,15 @@
 
         <tbody>
             <tr ng-repeat="stud in Students">
-                <td>{{stud.Id}}</td>
+                <td>{{stud.ID}}</td>
                 <td>{{stud.Name}}</td>
                 <td>{{stud.Birthday}}</td>
                 <td>{{stud.Reg_number}}</td>
 
                 <td style="width: 200px">
                     <a href="#" class="btn btn-primary" data-target="#updateStudent"
-                       data-toggle="modal" ng-click="updateScopeStudent(stud.Id)">Update</a>
-                    <a href="#" class="btn btn-danger" ng-click="deleteStudent(stud.Id)">Delete</a>
+                       data-toggle="modal" ng-click="updateScopeStudent(stud.ID)">Update</a>
+                    <a href="#" class="btn btn-danger" ng-click="deleteStudent(stud.ID)">Delete</a>
                 </td>
 
             </tr>
@@ -62,7 +62,7 @@
                 <div class="modal-body" style="margin: auto; width: 50%; ">
                     <form class="form-horizontal" name="addStudentForm">
                         <div class="form-group">
-                            <input class="form-control" readonly="readonly" name="Id" type="hidden" placeholder="Id" />
+                            <input class="form-control" readonly="readonly" name="ID" type="hidden" placeholder="ID" />
                         </div>
 
                         <div class="form-group">
@@ -98,7 +98,7 @@
                 <div class="modal-body" style="margin-left: 20px">
                     <form class="form-horizontal" name="updateStudentForm">
                         <div class="form-group">
-                            <input class="form-control" readonly="readonly" name="Id" ng-model="updateStudentId" type="hidden" placeholder="Id" />
+                            <input class="form-control" readonly="readonly" name="ID" ng-model="updateStudentID" type="hidden" placeholder="ID" />
                         </div>
                         <div class="form-group">
                             <label> Name</label>

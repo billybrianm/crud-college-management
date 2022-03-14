@@ -4,8 +4,8 @@
         return $http.get("/Student/GetStudents")
     };
 
-    this.getStudentGrades = function (Id) {
-        return $http.get("/Student/GetStudentGrades/" + Id);
+    this.getStudentGrades = function (ID) {
+        return $http.get("/Student/GetStudentGrades/" + ID);
     };
 
     this.insertStudent = function (student) {
@@ -28,7 +28,7 @@
         return updatedRequest;
     };
 
-    this.deleteStudent = function (studentId) {
-        return $http.post('/Student/DeleteStudent/' + studentId);
+    this.deleteStudent = function (studentID) {
+        return $http.post('/Student/DeleteStudent/' + studentID);
     };
 });

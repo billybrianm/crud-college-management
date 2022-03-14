@@ -8,12 +8,12 @@
         return $http.get("/Subject/GetListSubjectInfos");
     };
 
-    this.getSubject = (Id) => {
-        return $http.get("/Subject/GetSubject/" + Id)
+    this.getSubject = (ID) => {
+        return $http.get("/Subject/GetSubject/" + ID)
     };
 
-    this.getSubjectStudents = (Id) => {
-        return $http.get("/Subject/GetSubjectStudents/" + Id);
+    this.getSubjectStudents = (ID) => {
+        return $http.get("/Subject/GetSubjectStudents/" + ID);
     };
 
     this.enrollStudent = function (grade) {
@@ -56,7 +56,7 @@
         return request;
     };
 
-    this.deleteSubject = function (subjectId) {
-        return $http.post('/Subject/DeleteSubject/' + subjectId);
+    this.deleteSubject = function (subjectID) {
+        return $http.post('/Subject/DeleteSubject/' + subjectID);
     };
 });

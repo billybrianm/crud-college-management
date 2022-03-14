@@ -17,7 +17,7 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             using (var db = new MagniFinanceEntities())
             {
-                List<Subject> subjects = db.Subjects.Include(sub => sub.Cours).Include(sub => sub.Teacher).ToList();
+                List<Subject> subjects = db.Subjects.Include(sub => sub.Course).Include(sub => sub.Teacher).ToList();
                
 
                 return Json(subjects, JsonRequestBehavior.AllowGet);
@@ -31,10 +31,10 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             using (var db = new MagniFinanceEntities())
             {
-                string query = "select s.Id as SubjectId, s.Name as SubjectName, t.Name as TeacherName, t.Birthday as TeacherBirthday, t.Salary as TeacherSalary, COUNT(g.StudentId) as StudentCount from Subjects s "+
-                                "INNER JOIN Teachers t on s.Fk_TeacherId = t.Id "+
-                                "LEFT JOIN Grades g on g.SubjectId = s.Id "+
-                                "GROUP BY s.Id, s.Name, t.Name, t.Birthday, t.Salary";
+                string query = "select s.ID as SubjectID, s.Name as SubjectName, t.Name as TeacherName, t.Birthday as TeacherBirthday, t.Salary as TeacherSalary, COUNT(g.StudentID) as StudentCount from Subjects s "+
+                                "INNER JOIN Teachers t on s.TeacherID = t.ID "+
+                                "LEFT JOIN Grades g on g.SubjectID = s.ID "+
+                                "GROUP BY s.ID, s.Name, t.Name, t.Birthday, t.Salary";
                 var subjects = db.Database.SqlQuery<SubjectInfosDTO>(query).ToList();
 
                 return Json(subjects, JsonRequestBehavior.AllowGet);
@@ -44,11 +44,11 @@ namespace TechnicalTestMagniFinance.Controllers
         // List Subject with Students
         // GET Subject/GetSubjectStudents
         [HttpGet]
-        public JsonResult GetSubjectStudents(int Id)
+        public JsonResult GetSubjectStudents(int ID)
         {
             using (var db = new MagniFinanceEntities())
             {
-                var students = db.Database.SqlQuery<StudentDTO>("SELECT s.Id, s.Name, g.GradeValue from Students s INNER JOIN Grades g on (s.Id = g.StudentId) WHERE SubjectId = " + Id).ToList();
+                var students = db.Database.SqlQuery<StudentDTO>("SELECT s.ID, s.Name, g.GradeValue from Students s INNER JOIN Grades g on (s.ID = g.StudentID) WHERE SubjectID = " + ID).ToList();
 
                 return Json(students, JsonRequestBehavior.AllowGet);
             }
@@ -61,7 +61,7 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             using (var db = new MagniFinanceEntities())
             {
-                var gradeToRemove = db.Grades.Find(grade.StudentId, grade.SubjectId);
+                var gradeToRemove = db.Grades.Find(grade.StudentID, grade.SubjectID);
 
                 if (gradeToRemove == null)
                 {
@@ -87,8 +87,8 @@ namespace TechnicalTestMagniFinance.Controllers
                     Subject newSubject = db.Subjects.Add(subject);
                     db.SaveChanges();
 
-                    newSubject.Cours = db.Courses.Find(subject.Fk_CourseId);
-                    newSubject.Teacher = db.Teachers.Find(subject.Fk_TeacherId);
+                    newSubject.Course = db.Courses.Find(subject.CourseID);
+                    newSubject.Teacher = db.Teachers.Find(subject.TeacherID);
 
                     return Json(newSubject);
                 }
@@ -103,7 +103,7 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             using (var db = new MagniFinanceEntities())
             {
-                var updatedSubject = db.Subjects.Find(subject.Id);
+                var updatedSubject = db.Subjects.Find(subject.ID);
 
                 if (updatedSubject == null)
                 {
@@ -112,13 +112,13 @@ namespace TechnicalTestMagniFinance.Controllers
                 else
                 {
                     updatedSubject.Name = subject.Name;
-                    updatedSubject.Fk_CourseId = subject.Fk_CourseId;
-                    updatedSubject.Fk_TeacherId = subject.Fk_TeacherId;
+                    updatedSubject.CourseID = subject.CourseID;
+                    updatedSubject.TeacherID = subject.TeacherID;
 
                     db.SaveChanges();
 
-                    updatedSubject.Cours = db.Courses.Find(subject.Fk_CourseId);
-                    updatedSubject.Teacher = db.Teachers.Find(subject.Fk_TeacherId);
+                    updatedSubject.Course = db.Courses.Find(subject.CourseID);
+                    updatedSubject.Teacher = db.Teachers.Find(subject.TeacherID);
                     return Json(updatedSubject);
                 }
             }
@@ -127,11 +127,11 @@ namespace TechnicalTestMagniFinance.Controllers
         // Delete a Subject
         // POST Subject/DeleteSubject
         [HttpPost]
-        public JsonResult DeleteSubject(int Id)
+        public JsonResult DeleteSubject(int ID)
         {
             using (var db = new MagniFinanceEntities())
             {
-                var subject = db.Subjects.Find(Id);
+                var subject = db.Subjects.Find(ID);
 
                 if (subject == null)
                 {

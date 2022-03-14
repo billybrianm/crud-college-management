@@ -29,8 +29,8 @@
 
                 <td style="width: 200px">
                     <a href="#" class="btn btn-primary" data-target="#updateGrade"
-                       data-toggle="modal" ng-click="updateScopeGrade(gr.Id); loadReferences();">Update</a>
-                    <a href="#" class="btn btn-danger" ng-click="deleteGrade(gr.Id)">Delete</a>
+                       data-toggle="modal" ng-click="updateScopeGrade(gr.ID); loadReferences();">Update</a>
+                    <a href="#" class="btn btn-danger" ng-click="deleteGrade(gr.ID)">Delete</a>
                 </td>
 
             </tr>
@@ -48,18 +48,18 @@
                 <div class="modal-body" style="margin: auto; width: 50%; ">
                     <form class="form-horizontal" name="addGradeForm">
                         <div class="form-group">
-                            <input class="form-control" readonly="readonly" name="Id" type="hidden" placeholder="Id" />
+                            <input class="form-control" readonly="readonly" name="ID" type="hidden" placeholder="ID" />
                         </div>
 
 
 
                         <div class="form-group">
                             <label> Subject</label>
-                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentSubject" ng-options="subject as subject.Name for subject in Subjects track by subject.Id"></select>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentSubject" ng-options="subject as subject.Name for subject in Subjects track by subject.ID"></select>
                         </div>
                         <div class="form-group">
                             <label> Student</label>
-                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentStudent" ng-options="student as student.Name for student in Students track by student.Id"></select>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentStudent" ng-options="student as student.Name for student in Students track by student.ID"></select>
                         </div>
                         <div class="form-group">
                             <label> Grade</label>
@@ -86,7 +86,7 @@
                 <div class="modal-body" style="margin-left: 20px">
                     <form class="form-horizontal" name="updateGradeForm">
                         <div class="form-group">
-                            <input class="form-control" readonly="readonly" name="Id" ng-model="updateGradeId" type="hidden" placeholder="Id" />
+                            <input class="form-control" readonly="readonly" name="ID" ng-model="updateGradeID" type="hidden" placeholder="ID" />
                         </div>
                         <div class="form-group">
                             <label> Name</label>
@@ -94,11 +94,11 @@
                         </div>
                         <div class="form-group">
                             <label> Course</label>
-                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse" ng-options="course as course.Name for course in Courses track by course.Id"></select>
+                            <select class="form-control" name="courseSelect" id="courseSelect" ng-model="currentCourse" ng-options="course as course.Name for course in Courses track by course.ID"></select>
                         </div>
                         <div class="form-group">
                             <label> Teacher</label>
-                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentTeacher" ng-options="teacher as teacher.Name for teacher in Teachers track by teacher.Id"></select>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentTeacher" ng-options="teacher as teacher.Name for teacher in Teachers track by teacher.ID"></select>
                         </div>
                     </form>
                 </div>

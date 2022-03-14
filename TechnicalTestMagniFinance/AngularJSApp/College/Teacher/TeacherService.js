@@ -24,7 +24,7 @@
         return updatedRequest;
     };
 
-    this.deleteTeacher = function (teacherId) {
-        return $http.post('/Teacher/DeleteTeacher/' + teacherId);
+    this.deleteTeacher = function (teacherID) {
+        return $http.post('/Teacher/DeleteTeacher/' + teacherID);
     }
 });

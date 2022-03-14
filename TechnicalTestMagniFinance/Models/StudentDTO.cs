@@ -7,7 +7,7 @@ namespace TechnicalTestMagniFinance.Models
 {
     public class StudentDTO
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public Nullable<decimal> GradeValue { get; set; }
     }

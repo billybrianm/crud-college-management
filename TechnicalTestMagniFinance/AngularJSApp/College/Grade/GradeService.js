@@ -13,7 +13,7 @@
         return updatedRequest;
     };    
 
-    this.deleteGrade = function (gradeId) {
-        return $http.post('/Grade/DeleteGrade/' + gradeId);
+    this.deleteGrade = function (gradeID) {
+        return $http.post('/Grade/DeleteGrade/' + gradeID);
     };
 });

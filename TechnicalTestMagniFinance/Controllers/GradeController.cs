@@ -49,7 +49,7 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             using (var db = new MagniFinanceEntities())
             {
-                var updatedGrade = db.Grades.Find(grade.StudentId, grade.SubjectId);
+                var updatedGrade = db.Grades.Find(grade.StudentID, grade.SubjectID);
 
                 if (updatedGrade == null)
                 {
@@ -58,8 +58,8 @@ namespace TechnicalTestMagniFinance.Controllers
                 else
                 {
                     updatedGrade.GradeValue = grade.GradeValue;
-                    updatedGrade.StudentId = grade.StudentId;
-                    updatedGrade.SubjectId = grade.SubjectId;
+                    updatedGrade.StudentID = grade.StudentID;
+                    updatedGrade.SubjectID = grade.SubjectID;
 
                     db.SaveChanges();
                     return Json(updatedGrade);

@@ -14,7 +14,7 @@ namespace TechnicalTestMagniFinance.Models
     
     public partial class Student
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
         public string Reg_number { get; set; }

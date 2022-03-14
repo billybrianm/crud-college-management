@@ -8,14 +8,14 @@
     });
 
     $scope.$on('courseUpdated', function (event, course) {
-        let index = $scope.Courses.findIndex(element => element.Id == course.Id);
+        let index = $scope.Courses.findIndex(element => element.ID == course.ID);
 
         $scope.Courses[index] = course;
         $scope.$apply();
     });
 
     $scope.$on('courseDeleted', function (event, course) {
-        let index = $scope.Courses.findIndex(element => element.Id == course.Id);
+        let index = $scope.Courses.findIndex(element => element.ID == course.ID);
 
         $scope.Courses.splice(index, 1);
 
@@ -49,7 +49,7 @@
 
     $scope.insertCourse = () => {
 
-        if (!$scope.addCourseForm.$valid) {
+        if (!$scope.addCourseForm.$valID) {
             alert('All fields are required!');
             return;
         }
@@ -65,9 +65,9 @@
         });
     };
 
-    $scope.updateScopeCourse = function (Id) {
+    $scope.updateScopeCourse = function (ID) {
 
-        let course = $scope.Courses.find(element => element.Id == Id);
+        let course = $scope.Courses.find(element => element.ID == ID);
 
         angular.copy(course, $scope.course);
     };
@@ -84,8 +84,8 @@
         });
     };
 
-    $scope.deleteCourse = function (Id) {
-        courseService.deleteCourse(Id).then((res) => {
+    $scope.deleteCourse = function (ID) {
+        courseService.deleteCourse(ID).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Course deleted successfully.";
             signalrService.courseDeleted(res.data);

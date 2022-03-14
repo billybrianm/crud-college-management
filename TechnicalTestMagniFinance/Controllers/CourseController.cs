@@ -29,10 +29,10 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             using (var db = new MagniFinanceEntities())
             {
-                string query = "select c.Name, count(distinct s.Id) as SubjectCount, count(distinct t.Id) as TeacherCount, count(distinct stu.StudentId) as StudentCount, AVG(stu.GradeValue) as AverageGrades from Courses c " +
-                                "LEFT JOIN Subjects s on s.Fk_CourseId = c.Id " +
-                                "LEFT JOIN Teachers t on t.Id = s.Fk_TeacherId " +
-                                "LEFT JOIN Grades stu on stu.SubjectId = s.Id " +
+                string query = "select c.Name, count(distinct s.ID) as SubjectCount, count(distinct t.ID) as TeacherCount, count(distinct stu.StudentID) as StudentCount, AVG(stu.GradeValue) as AverageGrades from Courses c " +
+                                "LEFT JOIN Subjects s on s.CourseID = c.ID " +
+                                "LEFT JOIN Teachers t on t.ID = s.TeacherID " +
+                                "LEFT JOIN Grades stu on stu.SubjectID = s.ID " +
                                 "GROUP BY c.Name";
                 var courses = db.Database.SqlQuery<CourseInfosDTO>(query).ToList();
 
@@ -65,7 +65,7 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             using (var db = new MagniFinanceEntities())
             {
-                var updatedCourse = db.Courses.Find(course.Id);
+                var updatedCourse = db.Courses.Find(course.ID);
 
                 if (updatedCourse == null)
                 {

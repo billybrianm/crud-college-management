@@ -14,12 +14,12 @@ namespace TechnicalTestMagniFinance.Models
     
     public partial class Subject
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Fk_CourseId { get; set; }
-        public Nullable<int> Fk_TeacherId { get; set; }
+        public Nullable<int> CourseID { get; set; }
+        public Nullable<int> TeacherID { get; set; }
     
-        public virtual Course Cours { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public Course Course { get; set; }
+        public Teacher Teacher { get; set; }
     }
 }

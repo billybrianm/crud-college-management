@@ -12,9 +12,9 @@ namespace TechnicalTestMagniFinance.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Course
+    public class Course
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
     }
 }

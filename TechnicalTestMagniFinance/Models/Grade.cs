@@ -14,11 +14,11 @@ namespace TechnicalTestMagniFinance.Models
     
     public partial class Grade
     {
-        public int StudentId { get; set; }
-        public int SubjectId { get; set; }
+        public int StudentID { get; set; }
+        public int SubjectID { get; set; }
         public Nullable<decimal> GradeValue { get; set; }
     
-        public virtual Student Student { get; set; }
-        public virtual Subject Subject { get; set; }
+        public Student Student { get; set; }
+        public Subject Subject { get; set; }
     }
 }

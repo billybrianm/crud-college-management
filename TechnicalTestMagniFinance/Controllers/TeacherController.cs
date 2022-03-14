@@ -45,7 +45,7 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             using (var db = new MagniFinanceEntities())
             {
-                var updatedTeacher = db.Teachers.Find(teacher.Id);
+                var updatedTeacher = db.Teachers.Find(teacher.ID);
 
                 if (updatedTeacher == null)
                 {
@@ -66,11 +66,11 @@ namespace TechnicalTestMagniFinance.Controllers
         // Delete a Teacher
         // POST Teacher/DeleteTeacher
         [HttpPost]
-        public JsonResult DeleteTeacher(int Id)
+        public JsonResult DeleteTeacher(int ID)
         {
             using (var db = new MagniFinanceEntities())
             {
-                var teacher = db.Teachers.Find(Id);
+                var teacher = db.Teachers.Find(ID);
 
                 if (teacher == null)
                 {

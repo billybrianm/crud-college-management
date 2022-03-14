@@ -145,41 +145,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MagniFinanceEntities.cs" />
+    <Compile Include="Models\CollegeInitializer.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseInfosDTO.cs" />
+    <Compile Include="Models\Grade.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentDTO.cs" />
     <Compile Include="Models\StudentGradesDTO.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\SubjectInfosDTO.cs" />
+    <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\College.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>College.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\College.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>College.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\College.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>College.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Course.cs">
-      <DependentUpon>College.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Grade.cs">
-      <DependentUpon>College.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Student.cs">
-      <DependentUpon>College.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Subject.cs">
-      <DependentUpon>College.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Teacher.cs">
-      <DependentUpon>College.tt</DependentUpon>
-    </Compile>
     <Compile Include="SignalR\CollegeHub.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -197,10 +174,6 @@
     <Content Include="AngularJSApp\College\Subject\SubjectService.js" />
     <Content Include="AngularJSApp\College\Teacher\TeacherController.js" />
     <Content Include="AngularJSApp\College\Teacher\TeacherService.js" />
-    <Content Include="App_Data\MagniFinance.mdf" />
-    <Content Include="App_Data\MagniFinance_log.ldf">
-      <DependentUpon>MagniFinance.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -268,16 +241,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Models\College.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>College.edmx</DependentUpon>
-      <LastGenOutput>College.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\College.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>College.edmx</DependentUpon>
-      <LastGenOutput>College.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -300,15 +263,9 @@
     <Content Include="Views\Home\Subject.cshtml" />
     <Content Include="Views\Home\Grade.cshtml" />
     <Content Include="Views\Home\Enrollment.cshtml" />
-    <EntityDeploy Include="Models\College.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>College.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\College.edmx.diagram">
-      <DependentUpon>College.edmx</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Tests\" />
     <Folder Include="Views\Course\" />
     <Folder Include="Views\Grade\" />

@@ -14,7 +14,7 @@
     });
 
     $scope.$on('teacherUpdated', function (event, teacher) {
-        let index = $scope.Teachers.findIndex(element => element.Id == teacher.Id);
+        let index = $scope.Teachers.findIndex(element => element.ID == teacher.ID);
 
         teacher.Birthday = new Date(teacher.Birthday);
 
@@ -26,7 +26,7 @@
     });
 
     $scope.$on('teacherDeleted', function (event, teacher) {
-        let index = $scope.Teachers.findIndex(element => element.Id == teacher.Id);
+        let index = $scope.Teachers.findIndex(element => element.ID == teacher.ID);
 
         $scope.Teachers.splice(index, 1);
 
@@ -72,7 +72,7 @@
 
         $scope.teacher.Birthday = $scope.teacher.Birthday.toLocaleString();
 
-        if (!$scope.addTeacherForm.$valid) {
+        if (!$scope.addTeacherForm.$valID) {
             addTeacher.style.display = 'block';
 
             alert('All fields are required!');
@@ -89,9 +89,9 @@
         });
     };
 
-    $scope.updateScopeTeacher = function (Id) {
+    $scope.updateScopeTeacher = function (ID) {
 
-        let teacher = $scope.Teachers.find(element => element.Id == Id);
+        let teacher = $scope.Teachers.find(element => element.ID == ID);
 
         angular.copy(teacher, $scope.teacher);
 
@@ -111,8 +111,8 @@
         });
     };
 
-    $scope.deleteTeacher = function (Id) {
-        teacherService.deleteTeacher(Id).then((res) => {
+    $scope.deleteTeacher = function (ID) {
+        teacherService.deleteTeacher(ID).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Teacher deleted successfully.";
             signalrService.teacherDeleted(res.data);

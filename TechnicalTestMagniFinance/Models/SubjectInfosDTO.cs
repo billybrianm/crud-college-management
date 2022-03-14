@@ -7,7 +7,7 @@ namespace TechnicalTestMagniFinance.Models
 {
     public class SubjectInfosDTO
     {
-        public int SubjectId { get; set; }
+        public int SubjectID { get; set; }
         public string SubjectName { get; set; }
         public string TeacherName { get; set; }
         public Nullable<DateTime> TeacherBirthday { get; set; }

@@ -18,7 +18,7 @@
     });
 
     $scope.$on('subjectUpdated', function (event, subject) {
-        let index = $scope.Subjects.findIndex(element => element.Id == subject.Id);
+        let index = $scope.Subjects.findIndex(element => element.ID == subject.ID);
 
         $scope.Subjects[index] = subject;
 
@@ -26,7 +26,7 @@
     });
 
     $scope.$on('subjectDeleted', function (event, subject) {
-        let index = $scope.Subjects.findIndex(element => element.Id == subject.Id);
+        let index = $scope.Subjects.findIndex(element => element.ID == subject.ID);
 
         $scope.Subjects.splice(index, 1);
 
@@ -40,7 +40,7 @@
     });
 
     $scope.$on('gradeDeleted', function (event, grade) {
-        let index = $scope.subjectStudents.findIndex(element => element.StudentId == grade.StudentId);
+        let index = $scope.subjectStudents.findIndex(element => element.StudentID == grade.StudentID);
 
         $scope.subjectStudents.splice(index, 1);
 
@@ -50,8 +50,8 @@
     $scope.clearData = () => {
         $scope.subject = {
             Name: '',
-            Fk_TeacherId: '',
-            Fk_CourseId: ''
+            Fk_TeacherID: '',
+            Fk_CourseID: ''
         };
     };
 
@@ -67,7 +67,7 @@
     };
 
     $scope.getSubjectStudents = function(subj) {
-        subjectService.getSubjectStudents(subj.Id).then((res) => {
+        subjectService.getSubjectStudents(subj.ID).then((res) => {
             $scope.subjectStudents = res.data;
 
             $scope.currentSubject = subj;
@@ -77,10 +77,10 @@
     $scope.setSubjectEnrollment = async function (subj) {
         $scope.currentSubject = subj;
 
-        subjectService.getSubjectStudents(subj.Id).then((res) => {
+        subjectService.getSubjectStudents(subj.ID).then((res) => {
             $scope.subjectStudents = res.data;
 
-            const difference = $scope.Students.filter(({ Id: id1 }) => !$scope.subjectStudents.some(({ Id: id2 }) => id2 === id1));
+            const difference = $scope.Students.filter(({ ID: ID1 }) => !$scope.subjectStudents.some(({ ID: ID2 }) => ID2 === ID1));
 
             $scope.subjectStudents = difference;
         });
@@ -94,7 +94,7 @@
         if (typeof $scope.grade != "undefined")
             gradeValue = $scope.grade.GradeValue;
 
-        let grade = { SubjectId: $scope.currentSubject.Id, StudentId: $scope.currentStudent.Id, GradeValue: gradeValue };
+        let grade = { SubjectID: $scope.currentSubject.ID, StudentID: $scope.currentStudent.ID, GradeValue: gradeValue };
 
         subjectService.enrollStudent(grade).then((res) => {
             if (res.status == 200) {
@@ -108,9 +108,9 @@
         });
     };
 
-    $scope.unenrollStudent = function (StudentId) {
-        let grade = { StudentId: StudentId, SubjectId: $scope.currentSubject.Id };
-        subjectService.unenrollStudent(grade, $scope.currentSubject.Id).then((res) => {
+    $scope.unenrollStudent = function (StudentID) {
+        let grade = { StudentID: StudentID, SubjectID: $scope.currentSubject.ID };
+        subjectService.unenrollStudent(grade, $scope.currentSubject.ID).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Student unenrolled successfully";
             signalrService.gradeDeleted(res.data);
@@ -139,8 +139,8 @@
         });
     };
 
-    $scope.getSubject = function(Id) {
-        subjectService.getSubject(Id).then(function (result) {
+    $scope.getSubject = function(ID) {
+        subjectService.getSubject(ID).then(function (result) {
 
             $scope.currentSubject = result.data;
 
@@ -153,14 +153,14 @@
 
 
     $scope.insertSubject = () => {
-        if (!$scope.addSubjectForm.$valid) {
+        if (!$scope.addSubjectForm.$valID) {
 
             alert('All fields are required!');
             return;
         }
 
-        $scope.subject.Fk_CourseId = $scope.currentCourse.Id;
-        $scope.subject.Fk_TeacherId = $scope.currentTeacher.Id;
+        $scope.subject.Fk_CourseID = $scope.currentCourse.ID;
+        $scope.subject.Fk_TeacherID = $scope.currentTeacher.ID;
 
         let subjectAdded = subjectService.insertSubject($scope.subject).then((res) => {
             $scope.success = true;
@@ -173,9 +173,9 @@
         });
     };
 
-    $scope.updateScopeSubject = function (Id) {
+    $scope.updateScopeSubject = function (ID) {
 
-        let subject = $scope.Subjects.find(element => element.Id == Id);
+        let subject = $scope.Subjects.find(element => element.ID == ID);
 
         $scope.currentCourse = subject.Cours;
         $scope.currentTeacher = subject.Teacher;
@@ -185,8 +185,8 @@
 
     $scope.updateSubject = () => {
 
-        $scope.subject.Fk_TeacherId = $scope.currentTeacher.Id;
-        $scope.subject.Fk_CourseId = $scope.currentCourse.Id;
+        $scope.subject.Fk_TeacherID = $scope.currentTeacher.ID;
+        $scope.subject.Fk_CourseID = $scope.currentCourse.ID;
 
 
         subjectService.updateSubject($scope.subject).then((res) => {
@@ -199,8 +199,8 @@
         });
     };
 
-    $scope.deleteSubject = function (Id) {
-        subjectService.deleteSubject(Id).then((res) => {
+    $scope.deleteSubject = function (ID) {
+        subjectService.deleteSubject(ID).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Subject deleted successfully";
             signalrService.subjectDeleted(res.data);

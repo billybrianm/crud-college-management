@@ -29,7 +29,7 @@
         <tbody>
             <tr ng-repeat="subj in Subjects">
                 <td>{{subj.Name}}</td>
-                <td>{{subj.Cours.Name}}</td>
+                <td>{{subj.Course.Name}}</td>
 
                 <td style="width: 300px">
                     <a href="#" class="btn btn-primary" data-target="#addEnrollment"
@@ -53,7 +53,7 @@
                 <div class="modal-body" style="margin: auto; width: 50%; ">
                     <form class="form-horizontal" name="addGradeForm">
                         <div class="form-group">
-                            <input class="form-control" readonly="readonly" name="Id" type="hidden" placeholder="Id" />
+                            <input class="form-control" readonly="readonly" name="ID" type="hidden" placeholder="ID" />
                         </div>
 
 
@@ -64,7 +64,7 @@
                         </div>
                         <div class="form-group">
                             <label> Student</label>
-                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentStudent" ng-options="student as student.Name for student in subjectStudents track by student.Id"></select>
+                            <select class="form-control" name="teacherSelect" id="teacherSelect" ng-model="currentStudent" ng-options="student as student.Name for student in subjectStudents track by student.ID"></select>
                         </div>
                         <div class="form-group">
                             <label> Grade</label>
@@ -105,7 +105,7 @@
 
                                 <td style="width: 30px">
                                     <a href="#" class="btn btn-danger" data-target="#showStudents"
-                                       data-toggle="modal" ng-click="unenrollStudent(stud.Id)">Unenroll</a>
+                                       data-toggle="modal" ng-click="unenrollStudent(stud.ID)">Unenroll</a>
                                 </td>
 
                             </tr>

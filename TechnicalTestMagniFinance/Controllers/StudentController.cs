@@ -25,13 +25,13 @@ namespace TechnicalTestMagniFinance.Controllers
         // Get Student Grades
         // GET Student/GetStudentGrades
         [HttpGet]
-        public JsonResult GetStudentGrades(int Id)
+        public JsonResult GetStudentGrades(int ID)
         {
             using (var db = new MagniFinanceEntities())
             {
                 var grades = db.Database.SqlQuery<StudentGradesDTO>("SELECT s.Name as SubjectName, g.GradeValue from Subjects s " +
-                                                                    "LEFT JOIN Grades g on g.SubjectId = s.Id " +
-                                                                    "WHERE g.StudentId = " + Id).ToList();
+                                                                    "LEFT JOIN Grades g on g.SubjectID = s.ID " +
+                                                                    "WHERE g.StudentID = " + ID).ToList();
 
                 return Json(grades, JsonRequestBehavior.AllowGet);
             }
@@ -62,7 +62,7 @@ namespace TechnicalTestMagniFinance.Controllers
         {
             using (var db = new MagniFinanceEntities())
             {
-                var updatedStudent = db.Students.Find(student.Id);
+                var updatedStudent = db.Students.Find(student.ID);
 
                 if(updatedStudent == null)
                 {
@@ -83,11 +83,11 @@ namespace TechnicalTestMagniFinance.Controllers
         // Delete a Student
         // POST Student/DeleteStudent
         [HttpPost]
-        public JsonResult DeleteStudent(int Id)
+        public JsonResult DeleteStudent(int ID)
         {
             using (var db = new MagniFinanceEntities())
             {
-                var student = db.Students.Find(Id);
+                var student = db.Students.Find(ID);
 
                 if(student == null)
                 {

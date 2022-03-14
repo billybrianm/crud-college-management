@@ -14,7 +14,7 @@
     });
 
     $scope.$on('studentUpdated', function (event, student) {
-        let index = $scope.Students.findIndex(element => element.Id == student.Id);
+        let index = $scope.Students.findIndex(element => element.ID == student.ID);
 
         student.Birthday = new Date(student.Birthday);
 
@@ -26,7 +26,7 @@
     });
 
     $scope.$on('studentDeleted', function (event, student) {
-        let index = $scope.Students.findIndex(element => element.Id == student.Id);
+        let index = $scope.Students.findIndex(element => element.ID == student.ID);
 
         $scope.Students.splice(index, 1);
 
@@ -72,7 +72,7 @@
 
         $scope.student.Birthday = $scope.student.Birthday.toLocaleString();
 
-        if (!$scope.addStudentForm.$valid) {
+        if (!$scope.addStudentForm.$valID) {
 
             alert('All fields are required!');
             return ;
@@ -90,9 +90,9 @@
         
     };
 
-    $scope.updateScopeStudent = function (Id) {
+    $scope.updateScopeStudent = function (ID) {
 
-        let student = $scope.Students.find(element => element.Id == Id);
+        let student = $scope.Students.find(element => element.ID == ID);
 
         angular.copy(student, $scope.student);
 
@@ -112,8 +112,8 @@
         });
     };
 
-    $scope.deleteStudent = function (Id) {
-        studentService.deleteStudent(Id).then((res) => {
+    $scope.deleteStudent = function (ID) {
+        studentService.deleteStudent(ID).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Student deleted successfully";
             signalrService.studentDeleted(res.data);

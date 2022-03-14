@@ -39,14 +39,14 @@
         $scope.teacher = sub;
     };
 
-    $scope.subjectStudentGrades = function (Id) {
-        subjectService.getSubjectStudents(Id).then((res) => {
+    $scope.subjectStudentGrades = function (ID) {
+        subjectService.getSubjectStudents(ID).then((res) => {
             $scope.subjectStudents = res.data;
         });
     };
 
     $scope.studentGrades = function (stud) {
-        studentService.getStudentGrades(stud.Id).then((res) => {
+        studentService.getStudentGrades(stud.ID).then((res) => {
             $scope.student = res.data;
             $scope.student.Name = stud.Name;
         });

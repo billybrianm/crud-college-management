@@ -28,7 +28,7 @@
         return updatedRequest;
     };
 
-    this.deleteCourse = function (CourseId) {
-        return $http.post('/Course/DeleteCourse/' + CourseId);
+    this.deleteCourse = function (CourseID) {
+        return $http.post('/Course/DeleteCourse/' + CourseID);
     };
 });

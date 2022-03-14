@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechnicalTestMagniFinance.Models;
 using TechnicalTestMagniFinance.Controllers;
@@ -58,11 +56,11 @@ namespace TechnicalTestMagniFinanceTests
 
 
                 Grade grade1 = new Grade();
-                grade1.StudentId = student1.Id;
-                grade1.SubjectId = 1;
+                grade1.StudentID = student1.ID;
+                grade1.SubjectID = 1;
                 Grade grade2 = new Grade();
-                grade2.StudentId = student2.Id;
-                grade2.SubjectId = 1;
+                grade2.StudentID = student2.ID;
+                grade2.SubjectID = 1;
 
                 // grade1
                 db.Grades.Add(grade1);
@@ -90,8 +88,8 @@ namespace TechnicalTestMagniFinanceTests
             List<SubjectInfosDTO> infos = (List<SubjectInfosDTO>)dto.Data;
 
 
-            // use infos of subject Animals 101
-            Assert.IsTrue(infos[0].SubjectName.TrimEnd() == "Animals 101");
+            // use infos of subject Anatomy
+            Assert.IsTrue(infos[0].SubjectName.TrimEnd() == "Anatomy");
 
             int? studentCount = infos[0].StudentCount;
 
@@ -107,11 +105,11 @@ namespace TechnicalTestMagniFinanceTests
 
 
                 Grade grade1 = new Grade();
-                grade1.StudentId = student1.Id;
-                grade1.SubjectId = 1;
+                grade1.StudentID = student1.ID;
+                grade1.SubjectID = 1;
                 Grade grade2 = new Grade();
-                grade2.StudentId = student2.Id;
-                grade2.SubjectId = 1;
+                grade2.StudentID = student2.ID;
+                grade2.SubjectID = 1;
 
                 // grade1
                 db.Grades.Add(grade1);
@@ -142,7 +140,7 @@ namespace TechnicalTestMagniFinanceTests
 
                 StudentController stu = new StudentController();
 
-                JsonResult dto = stu.GetStudentGrades(student1.Id);
+                JsonResult dto = stu.GetStudentGrades(student1.ID);
 
                 List<StudentGradesDTO> infos = (List<StudentGradesDTO>)dto.Data;
 
@@ -150,14 +148,14 @@ namespace TechnicalTestMagniFinanceTests
                 Assert.AreEqual(0, infos.Count);
 
                 Grade grade = new Grade();
-                grade.StudentId = student1.Id;
-                grade.SubjectId = 1;
+                grade.StudentID = student1.ID;
+                grade.SubjectID = 1;
 
                 grade = db.Grades.Add(grade);
 
                 db.SaveChanges();
 
-                dto = stu.GetStudentGrades(student1.Id);
+                dto = stu.GetStudentGrades(student1.ID);
 
                 infos = (List<StudentGradesDTO>)dto.Data;
 

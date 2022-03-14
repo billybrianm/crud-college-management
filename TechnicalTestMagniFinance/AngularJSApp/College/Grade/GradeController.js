@@ -49,14 +49,14 @@
 
 
     $scope.insertGrade = () => {
-        if (!$scope.addGradeForm.$valid) {
+        if (!$scope.addGradeForm.$valID) {
 
             alert('All fields are required!');
             return;
         }
 
-        $scope.grade.StudentId = $scope.currentStudent.Id;
-        $scope.grade.SubjectId = $scope.currentSubject.Id;
+        $scope.grade.StudentID = $scope.currentStudent.ID;
+        $scope.grade.SubjectID = $scope.currentSubject.ID;
 
         let gradeAdded = gradeService.insertGrade($scope.grade).then((res) => {
             $scope.success = true;
@@ -69,9 +69,9 @@
         });
     };
 
-    $scope.updateScopeGrade = function (Id) {
+    $scope.updateScopeGrade = function (ID) {
 
-        let grade = $scope.Grades.find(element => element.Id == Id);
+        let grade = $scope.Grades.find(element => element.ID == ID);
 
         $scope.currentCourse = grade.Cours;
         $scope.currentTeacher = grade.Teacher;
@@ -81,8 +81,8 @@
 
     $scope.updateGrade = () => {
 
-        $scope.grade.Fk_TeacherId = $scope.currentTeacher.Id;
-        $scope.grade.Fk_CourseId = $scope.currentCourse.Id;
+        $scope.grade.Fk_TeacherID = $scope.currentTeacher.ID;
+        $scope.grade.Fk_CourseID = $scope.currentCourse.ID;
 
 
         gradeService.updateGrade($scope.grade).then((res) => {
@@ -95,8 +95,8 @@
         });
     };
 
-    $scope.deleteGrade = function (Id) {
-        gradeService.deleteGrade(Id).then((res) => {
+    $scope.deleteGrade = function (ID) {
+        gradeService.deleteGrade(ID).then((res) => {
             $scope.success = true;
             $scope.successMessage = "Grade deleted successfully";
             signalrService.gradeDeleted(res.data);
