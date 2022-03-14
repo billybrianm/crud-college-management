@@ -1,6 +1,4 @@
-[TOC]
-
-###college-management
+### college-management
 #### Purpose
 This is a web application designed for managing a simple college system with the following models: 
 
