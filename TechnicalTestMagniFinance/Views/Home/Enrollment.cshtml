@@ -94,14 +94,13 @@
                             <tr>
                                 <th>Student</th>
                                 <th>Grade</th>
-                                <th>Course</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="stud in subjectStudents">
                                 <td>{{stud.Name}}</td>
                                 <td>{{stud.GradeValue}}</td>
-                                <td>{{stud.Course.Name}}</td>
 
                                 <td style="width: 30px">
                                     <a href="#" class="btn btn-danger" data-target="#showStudents"

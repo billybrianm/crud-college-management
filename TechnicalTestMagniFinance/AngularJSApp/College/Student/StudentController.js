@@ -72,7 +72,7 @@
 
         $scope.student.Birthday = $scope.student.Birthday.toLocaleString();
 
-        if (!$scope.addStudentForm.$valID) {
+        if (!$scope.addStudentForm.$valid) {
 
             alert('All fields are required!');
             return ;

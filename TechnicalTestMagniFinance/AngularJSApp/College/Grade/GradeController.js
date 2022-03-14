@@ -49,7 +49,7 @@
 
 
     $scope.insertGrade = () => {
-        if (!$scope.addGradeForm.$valID) {
+        if (!$scope.addGradeForm.$valid) {
 
             alert('All fields are required!');
             return;
@@ -73,7 +73,7 @@
 
         let grade = $scope.Grades.find(element => element.ID == ID);
 
-        $scope.currentCourse = grade.Cours;
+        $scope.currentCourse = grade.Course;
         $scope.currentTeacher = grade.Teacher;
 
         $scope.grade = angular.copy(grade);
@@ -81,8 +81,8 @@
 
     $scope.updateGrade = () => {
 
-        $scope.grade.Fk_TeacherID = $scope.currentTeacher.ID;
-        $scope.grade.Fk_CourseID = $scope.currentCourse.ID;
+        $scope.grade.TeacherID = $scope.currentTeacher.ID;
+        $scope.grade.CourseID = $scope.currentCourse.ID;
 
 
         gradeService.updateGrade($scope.grade).then((res) => {

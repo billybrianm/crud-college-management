@@ -50,9 +50,11 @@
     $scope.clearData = () => {
         $scope.subject = {
             Name: '',
-            Fk_TeacherID: '',
-            Fk_CourseID: ''
+            TeacherID: '',
+            CourseID: '',            
         };
+        $scope.currentCourse = '';
+        $scope.currentTeacher = '';
     };
 
     $scope.loadReferences = () => {
@@ -153,14 +155,14 @@
 
 
     $scope.insertSubject = () => {
-        if (!$scope.addSubjectForm.$valID) {
+        if (!$scope.addSubjectForm.$valid) {
 
             alert('All fields are required!');
             return;
         }
 
-        $scope.subject.Fk_CourseID = $scope.currentCourse.ID;
-        $scope.subject.Fk_TeacherID = $scope.currentTeacher.ID;
+        $scope.subject.CourseID = $scope.currentCourse.ID;
+        $scope.subject.TeacherID = $scope.currentTeacher.ID;
 
         let subjectAdded = subjectService.insertSubject($scope.subject).then((res) => {
             $scope.success = true;
@@ -177,7 +179,7 @@
 
         let subject = $scope.Subjects.find(element => element.ID == ID);
 
-        $scope.currentCourse = subject.Cours;
+        $scope.currentCourse = subject.Course;
         $scope.currentTeacher = subject.Teacher;
 
         $scope.subject = angular.copy(subject);
@@ -185,8 +187,8 @@
 
     $scope.updateSubject = () => {
 
-        $scope.subject.Fk_TeacherID = $scope.currentTeacher.ID;
-        $scope.subject.Fk_CourseID = $scope.currentCourse.ID;
+        $scope.subject.TeacherID = $scope.currentTeacher.ID;
+        $scope.subject.CourseID = $scope.currentCourse.ID;
 
 
         subjectService.updateSubject($scope.subject).then((res) => {

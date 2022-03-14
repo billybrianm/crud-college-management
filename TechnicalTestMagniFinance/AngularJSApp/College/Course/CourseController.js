@@ -49,7 +49,7 @@
 
     $scope.insertCourse = () => {
 
-        if (!$scope.addCourseForm.$valID) {
+        if (!$scope.addCourseForm.$valid) {
             alert('All fields are required!');
             return;
         }
